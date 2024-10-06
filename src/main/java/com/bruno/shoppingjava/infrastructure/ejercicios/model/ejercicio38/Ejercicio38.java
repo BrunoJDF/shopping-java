@@ -7,9 +7,8 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
-import java.util.random.RandomGenerator;
-import java.util.stream.IntStream;
 
 public class Ejercicio38 {
     private final Logger logger = LoggerFactory.getLogger(Ejercicio38.class);
@@ -38,14 +37,10 @@ public class Ejercicio38 {
     }
 
     private List<Winner> getRandomWinners(List<Winner> listActive, int top) {
-        IntStream distincted = RandomGenerator.getDefault().ints(0, listActive.size())
-                .distinct();
-        return distincted
-                .limit(top)
-                .mapToObj(value -> {
-                    logger.info("Random value: {}", value);
-                    return listActive.get(value);
-                })
+        var newList = new ArrayList<>(listActive);
+        Collections.shuffle(newList);  // Mezcla la lista activa
+        return newList.stream()
+                .limit(top)  // Toma los primeros 'top' elementos
                 .toList();
     }
 
