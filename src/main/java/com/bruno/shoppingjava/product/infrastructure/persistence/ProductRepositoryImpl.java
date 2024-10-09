@@ -21,4 +21,10 @@ public class ProductRepositoryImpl implements ProductRepository {
     public Product save(Product product) {
         return crudProductRepository.save(product);
     }
+
+    @Override
+    public Product findById(Long id) {
+        return crudProductRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+    }
 }
