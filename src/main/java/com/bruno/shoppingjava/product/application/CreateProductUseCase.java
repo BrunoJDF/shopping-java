@@ -1,20 +1,18 @@
 package com.bruno.shoppingjava.product.application;
 
+import com.bruno.shoppingjava.product.application.request.CreateProductRequest;
 import com.bruno.shoppingjava.product.application.response.ProductResponse;
 import com.bruno.shoppingjava.product.domain.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class GetAllProductUseCase {
+public class CreateProductUseCase {
     private final ProductRepository productRepository;
 
-    public List<ProductResponse> getAll() {
-        return productRepository.getAll().stream()
-                .map(ProductResponse::toResponse)
-                .toList();
+    public ProductResponse create(CreateProductRequest request) {
+        var saved = productRepository.save(request.toProductDomain());
+        return ProductResponse.toResponse(saved);
     }
 }

@@ -16,4 +16,9 @@ public class ProductRepositoryImpl implements ProductRepository {
     public List<Product> getAll() {
         return (List<Product>) crudProductRepository.findAll();
     }
+
+    @Override
+    public Product save(Product product) {
+        return crudProductRepository.save(product);
+    }
 }
