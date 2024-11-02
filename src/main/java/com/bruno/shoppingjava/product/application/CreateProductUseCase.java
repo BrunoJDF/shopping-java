@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class CreateProductUseCase {
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-    public ProductResponse create(CreateProductRequest request) {
-        var saved = productRepository.save(request.toProductDomain());
-        return ProductResponse.toResponse(saved);
-    }
+  public ProductResponse create(CreateProductRequest request) {
+    var saved = productRepository.save(request.toProductDomain());
+    return ProductResponse.toResponse(saved);
+  }
 }

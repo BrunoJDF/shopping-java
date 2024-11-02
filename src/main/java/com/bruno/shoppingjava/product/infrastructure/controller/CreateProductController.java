@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class CreateProductController {
 
-    private final CreateProductUseCase createProductUseCase;
+  private final CreateProductUseCase createProductUseCase;
 
-    @PostMapping("/create")
-    public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest request) {
-        var data = createProductUseCase.create(request);
-        return ResponseEntity.ok(data);
-    }
+  @PostMapping("/create")
+  public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest request) {
+    var data = createProductUseCase.create(request);
+    return ResponseEntity.ok(data);
+  }
 }

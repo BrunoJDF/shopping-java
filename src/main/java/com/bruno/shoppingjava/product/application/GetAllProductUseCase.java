@@ -10,11 +10,11 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class GetAllProductUseCase {
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-    public List<ProductResponse> getAll() {
-        return productRepository.getAll().stream()
-                .map(ProductResponse::toResponse)
-                .toList();
-    }
+  public List<ProductResponse> getAll() {
+    return productRepository.getAll().stream()
+      .map(ProductResponse::toResponse)
+      .toList();
+  }
 }

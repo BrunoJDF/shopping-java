@@ -15,11 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/products")
 @RequiredArgsConstructor
 public class UpdateProductController {
-    private final UpdateProductUseCase updateProductUseCase;
+  private final UpdateProductUseCase updateProductUseCase;
 
-    @PatchMapping("/update/{id}")
-    public ResponseEntity<ProductResponse> updateProduct(@RequestBody UpdateProductRequest request, @PathVariable Long id) {
-        var data = updateProductUseCase.updateProduct(request, id);
-        return ResponseEntity.ok(data);
-    }
+  @PatchMapping("/update/{id}")
+  public ResponseEntity<ProductResponse> updateProduct(@RequestBody UpdateProductRequest request, @PathVariable Long id) {
+    var data = updateProductUseCase.updateProduct(request, id);
+    return ResponseEntity.ok(data);
+  }
 }

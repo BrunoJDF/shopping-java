@@ -15,16 +15,16 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GetProductController {
 
-    private final GetAllProductUseCase getAllProductUseCase;
+  private final GetAllProductUseCase getAllProductUseCase;
 
-    @GetMapping
-    public ResponseEntity<String> home() {
-        String message = "Hello, Product!";
-        return ResponseEntity.ok(message);
-    }
+  @GetMapping
+  public ResponseEntity<String> home() {
+    String message = "Hello, Product!";
+    return ResponseEntity.ok(message);
+  }
 
-    @GetMapping("/get-all")
-    public ResponseEntity<List<ProductResponse>> findAll() {
-        return ResponseEntity.ok(getAllProductUseCase.getAll());
-    }
+  @GetMapping("/get-all")
+  public ResponseEntity<List<ProductResponse>> findAll() {
+    return ResponseEntity.ok(getAllProductUseCase.getAll());
+  }
 }

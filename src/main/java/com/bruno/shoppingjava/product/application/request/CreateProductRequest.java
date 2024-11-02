@@ -11,13 +11,13 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CreateProductRequest {
-    private String name;
-    private BigDecimal price;
+  private String name;
+  private BigDecimal price;
 
-    public Product toProductDomain() {
-        return Product.builder()
-                .name(name)
-                .price(price)
-                .build();
-    }
+  public Product toProductDomain() {
+    return Product.builder()
+      .name(name)
+      .price(price)
+      .build();
+  }
 }

@@ -13,15 +13,15 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ProductResponse {
-    private Long id;
-    private String name;
-    private BigDecimal price;
+  private Long id;
+  private String name;
+  private BigDecimal price;
 
-    public static ProductResponse toResponse(Product saved) {
-        return ProductResponse.builder()
-                .id(saved.getId())
-                .name(saved.getName())
-                .price(saved.getPrice())
-                .build();
-    }
+  public static ProductResponse toResponse(Product saved) {
+    return ProductResponse.builder()
+      .id(saved.getId())
+      .name(saved.getName())
+      .price(saved.getPrice())
+      .build();
+  }
 }

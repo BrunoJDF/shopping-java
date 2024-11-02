@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class UpdateProductUseCase {
-    private final ProductRepository productRepository;
+  private final ProductRepository productRepository;
 
-    public ProductResponse updateProduct(UpdateProductRequest request, Long id) {
-        var product = productRepository.findById(id);
-        product.setName(request.getName());
-        product.setPrice(request.getPrice());
+  public ProductResponse updateProduct(UpdateProductRequest request, Long id) {
+    var product = productRepository.findById(id);
+    product.setName(request.getName());
+    product.setPrice(request.getPrice());
 
-        var saved = productRepository.save(product);
-        return ProductResponse.toResponse(saved);
-    }
+    var saved = productRepository.save(product);
+    return ProductResponse.toResponse(saved);
+  }
 }
