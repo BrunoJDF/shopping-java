@@ -26,6 +26,8 @@ public class ProductRepositoryImpl implements ProductRepository {
   @Override
   public Product findById(Long id) {
     return crudProductRepository.findById(id)
-      .orElseThrow(() -> new ShoppingNotFoundException(Product.class.getName()));
+      .orElseThrow(() ->
+        new ShoppingNotFoundException(Product.class.getName())
+      );
   }
 }

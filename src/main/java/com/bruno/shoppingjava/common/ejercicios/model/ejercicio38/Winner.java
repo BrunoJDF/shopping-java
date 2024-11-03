@@ -1,4 +1,4 @@
-package com.bruno.shoppingjava.infrastructure.ejercicios.model.ejercicio38;
+package com.bruno.shoppingjava.common.ejercicios.model.ejercicio38;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Winner {
-    private String id;
-    private String email;
-    private String status;
+  private String id;
+  private String email;
+  private String status;
 }
