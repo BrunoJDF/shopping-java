@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Data
 @Builder
@@ -18,10 +19,12 @@ public class ProductResponse {
   private BigDecimal price;
 
   public static ProductResponse toResponse(Product saved) {
-    return ProductResponse.builder()
-      .id(saved.getId())
-      .name(saved.getName())
-      .price(saved.getPrice())
-      .build();
+    return Optional.ofNullable(saved)
+      .map(product -> ProductResponse.builder()
+        .id(product.getId())
+        .name(product.getName())
+        .price(product.getPrice())
+        .build())
+      .orElse(null);
   }
 }
