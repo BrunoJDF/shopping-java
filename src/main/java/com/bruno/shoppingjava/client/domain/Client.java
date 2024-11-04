@@ -1,15 +1,19 @@
 package com.bruno.shoppingjava.client.domain;
 
+import com.bruno.shoppingjava.invoice.domain.Invoice;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -30,4 +34,8 @@ public class Client {
   private String phone;
   private String address;
   private String status;
+
+  // relationship with invoice
+  @OneToMany(mappedBy = "client")
+  private List<Invoice> invoices;
 }
