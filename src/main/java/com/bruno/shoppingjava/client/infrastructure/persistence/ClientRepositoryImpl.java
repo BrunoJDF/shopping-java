@@ -20,7 +20,7 @@ public class ClientRepositoryImpl implements ClientRepository {
   public Client findById(Long id) {
     return crudClientRepository.findById(id)
       .orElseThrow(() ->
-        new ShoppingNotFoundException(Client.class.getName())
+        new ShoppingNotFoundException(Client.class.getSimpleName())
       );
   }
 }
