@@ -27,7 +27,7 @@ public class ProductRepositoryImpl implements ProductRepository {
   public Product findById(Long id) {
     return crudProductRepository.findById(id)
       .orElseThrow(() ->
-        new ShoppingNotFoundException(Product.class.getName())
+        new ShoppingNotFoundException(Product.class)
       );
   }
 }

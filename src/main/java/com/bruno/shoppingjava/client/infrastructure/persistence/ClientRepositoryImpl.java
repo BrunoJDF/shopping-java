@@ -6,6 +6,8 @@ import com.bruno.shoppingjava.shared.application.exception.ShoppingNotFoundExcep
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 @RequiredArgsConstructor
 public class ClientRepositoryImpl implements ClientRepository {
@@ -20,7 +22,12 @@ public class ClientRepositoryImpl implements ClientRepository {
   public Client findById(Long id) {
     return crudClientRepository.findById(id)
       .orElseThrow(() ->
-        new ShoppingNotFoundException(Client.class.getSimpleName())
+        new ShoppingNotFoundException(Client.class)
       );
+  }
+
+  @Override
+  public List<Client> findAll() {
+    return (List<Client>) crudClientRepository.findAll();
   }
 }
