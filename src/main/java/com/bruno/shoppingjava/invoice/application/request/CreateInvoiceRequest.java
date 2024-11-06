@@ -16,8 +16,8 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateInvoiceRequest {
-  private String codInvoice;
   private BigDecimal subTotalPrice;
+  private Long clientId;
 
   public Invoice toInvoiceDomain() {
     return Optional.of(this)
@@ -27,7 +27,6 @@ public class CreateInvoiceRequest {
         BigDecimal totalPrice =
           subTotalPrice.add(igv);
         return Invoice.builder()
-            .cod_invoice(inv.getCodInvoice())
             .sub_total_price(inv.getSubTotalPrice())
             .igv(igv)
             .total_price(totalPrice)
