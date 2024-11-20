@@ -18,3 +18,7 @@ spring:
     password: pwd
 server:
   port: 8080
+logging:
+  level:
+    root: warn
+    com.bruno.shoppingjava: debug
