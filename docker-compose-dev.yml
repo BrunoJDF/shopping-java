@@ -12,3 +12,4 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-shopping-cart}
     volumes:
       - ./data/db-shopping-cart:/var/lib/postgresql/data
+    restart: always

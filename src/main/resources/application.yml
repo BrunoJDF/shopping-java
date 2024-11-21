@@ -16,6 +16,8 @@ spring:
     url: jdbc:postgresql://localhost:5434/shopping-cart
     username: root
     password: pwd
+  webflux:
+    base-path: /api
 server:
   port: 8080
 logging:
