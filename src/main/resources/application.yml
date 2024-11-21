@@ -13,7 +13,7 @@ spring:
       schema-locations: classpath:schema.sql
       mode: always
   datasource:
-    url: jdbc:postgresql://localhost:5432/shopping-cart
+    url: jdbc:postgresql://localhost:5434/shopping-cart
     username: root
     password: pwd
 server:
