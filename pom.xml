@@ -69,13 +69,13 @@
       <artifactId>reactor-test</artifactId>
       <scope>test</scope>
     </dependency>
-    <!-- Orika -->
+    <!-- Orika
     <dependency>
       <groupId>ma.glasnost.orika</groupId>
       <artifactId>orika-core</artifactId>
       <version>1.5.4</version>
     </dependency>
-    <!-- Orika -->
+    Orika -->
   </dependencies>
 
   <build>
