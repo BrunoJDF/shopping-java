@@ -2,14 +2,14 @@ package com.bruno.shoppingjava.client.application.request;
 
 import com.bruno.shoppingjava.client.domain.Client;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.util.Optional;
 
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateClientRequest {

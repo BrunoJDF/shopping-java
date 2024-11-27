@@ -8,4 +8,6 @@ public interface ClientRepository {
   Client findById(Long id);
 
   List<Client> findAll();
+
+  Client update(Client clientToUpdate);
 }

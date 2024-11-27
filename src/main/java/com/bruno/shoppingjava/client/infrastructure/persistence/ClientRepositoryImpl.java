@@ -15,7 +15,7 @@ public class ClientRepositoryImpl implements ClientRepository {
 
   @Override
   public Client create(Client client) {
-    return crudClientRepository.save(client);
+    return save(client);
   }
 
   @Override
@@ -29,5 +29,14 @@ public class ClientRepositoryImpl implements ClientRepository {
   @Override
   public List<Client> findAll() {
     return (List<Client>) crudClientRepository.findAll();
+  }
+
+  @Override
+  public Client update(Client clientToUpdate) {
+    return save(clientToUpdate);
+  }
+
+  private Client save(Client client) {
+    return crudClientRepository.save(client);
   }
 }
