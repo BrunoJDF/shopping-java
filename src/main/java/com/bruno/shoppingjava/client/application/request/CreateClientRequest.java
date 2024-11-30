@@ -26,8 +26,8 @@ public class CreateClientRequest {
         String fullName = client.getName() + " " + client.getLastName();
         return Client.builder()
           .name(client.getName())
-          .last_name(client.getLastName())
-          .full_name(fullName)
+          .lastName(client.getLastName())
+          .fullName(fullName)
           .ruc(client.getRuc())
           .email(client.getEmail())
           .phone(client.getPhone())

@@ -17,8 +17,8 @@ public class UpdateClientUseCase {
     Client clientToUpdate = request.toClientDomain();
 
     clientFounded.setName(clientToUpdate.getName());
-    clientFounded.setLast_name(clientToUpdate.getLast_name());
-    clientFounded.setFull_name(clientToUpdate.getFull_name());
+    clientFounded.setLastName(clientToUpdate.getLastName());
+    clientFounded.setFullName(clientToUpdate.getFullName());
     clientFounded.setRuc(clientToUpdate.getRuc());
     clientFounded.setEmail(clientToUpdate.getEmail());
     clientFounded.setPhone(clientToUpdate.getPhone());
