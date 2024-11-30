@@ -13,20 +13,19 @@ public class UpdateClientUseCase {
   private final ClientRepository clientRepository;
 
   public ClientResponse update(Long id, UpdateClientRequest request) {
-    var clientFounded = clientRepository.findById(id);
-    var clientToUpdate = request.toClientDomain();
+    Client clientFounded = clientRepository.findById(id);
+    Client clientToUpdate = request.toClientDomain();
 
-    clientToUpdate.setId(clientFounded.getId());
-    clientToUpdate.setName(clientFounded.getName());
-    clientToUpdate.setLast_name(clientFounded.getLast_name());
-    clientToUpdate.setFull_name(clientFounded.getFull_name());
-    clientToUpdate.setRuc(clientFounded.getRuc());
-    clientToUpdate.setEmail(clientFounded.getEmail());
-    clientToUpdate.setPhone(clientFounded.getPhone());
-    clientToUpdate.setAddress(clientFounded.getAddress());
-    clientToUpdate.setStatus(clientFounded.getStatus());
+    clientFounded.setName(clientToUpdate.getName());
+    clientFounded.setLast_name(clientToUpdate.getLast_name());
+    clientFounded.setFull_name(clientToUpdate.getFull_name());
+    clientFounded.setRuc(clientToUpdate.getRuc());
+    clientFounded.setEmail(clientToUpdate.getEmail());
+    clientFounded.setPhone(clientToUpdate.getPhone());
+    clientFounded.setAddress(clientToUpdate.getAddress());
+    clientFounded.setStatus(clientToUpdate.getStatus());
 
-    Client update = clientRepository.update(clientToUpdate);
+    Client update = clientRepository.update(clientFounded);
     return ClientResponse.toResponse(update);
   }
 }
