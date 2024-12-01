@@ -1,4 +1,4 @@
-package com.bruno.shoppingjava.invoice.infrastructure.controller;
+package com.bruno.shoppingjava.invoice.infrastructure.controller.parent;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

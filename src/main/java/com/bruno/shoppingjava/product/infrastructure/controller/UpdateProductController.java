@@ -3,6 +3,7 @@ package com.bruno.shoppingjava.product.infrastructure.controller;
 import com.bruno.shoppingjava.product.application.UpdateProductUseCase;
 import com.bruno.shoppingjava.product.application.request.UpdateProductRequest;
 import com.bruno.shoppingjava.product.application.response.ProductResponse;
+import com.bruno.shoppingjava.product.infrastructure.controller.parent.ProductAbstractController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PatchMapping;

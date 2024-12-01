@@ -1,4 +1,4 @@
-package com.bruno.shoppingjava.client.infrastructure.controller;
+package com.bruno.shoppingjava.client.infrastructure.controller.parent;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 

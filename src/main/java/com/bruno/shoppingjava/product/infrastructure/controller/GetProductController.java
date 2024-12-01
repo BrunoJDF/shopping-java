@@ -1,8 +1,8 @@
 package com.bruno.shoppingjava.product.infrastructure.controller;
 
-import com.bruno.shoppingjava.product.application.GetAllProductUseCase;
 import com.bruno.shoppingjava.product.application.GetProductUseCase;
 import com.bruno.shoppingjava.product.application.response.ProductResponse;
+import com.bruno.shoppingjava.product.infrastructure.controller.parent.ProductAbstractController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +15,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class GetProductController extends ProductAbstractController {
 
-  private final GetAllProductUseCase getAllProductUseCase;
   private final GetProductUseCase getProductUseCase;
 
   @GetMapping
@@ -26,7 +25,7 @@ public class GetProductController extends ProductAbstractController {
 
   @GetMapping("/get-all")
   public ResponseEntity<List<ProductResponse>> findAll() {
-    return ResponseEntity.ok(getAllProductUseCase.getAll());
+    return ResponseEntity.ok(getProductUseCase.getAll());
   }
 
   @GetMapping("/{id}")
