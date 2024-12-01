@@ -17,13 +17,13 @@ public class GetProductController extends ProductAbstractController {
 
   private final GetProductUseCase getProductUseCase;
 
-  @GetMapping
+  @GetMapping("/home")
   public ResponseEntity<String> home() {
     String message = "Hello, Product!";
     return ResponseEntity.ok(message);
   }
 
-  @GetMapping("/get-all")
+  @GetMapping
   public ResponseEntity<List<ProductResponse>> findAll() {
     return ResponseEntity.ok(getProductUseCase.getAll());
   }
