@@ -25,11 +25,13 @@ public class GetProductController extends ProductAbstractController {
 
   @GetMapping
   public ResponseEntity<List<ProductResponse>> findAll() {
-    return ResponseEntity.ok(getProductUseCase.getAll());
+    List<ProductResponse> productList = getProductUseCase.getAll();
+    return ResponseEntity.ok(productList);
   }
 
   @GetMapping("/{id}")
   public ResponseEntity<ProductResponse> findById(@PathVariable Long id) {
-    return ResponseEntity.ok(getProductUseCase.getById(id));
+    ProductResponse productResponse = getProductUseCase.getById(id);
+    return ResponseEntity.ok(productResponse);
   }
 }

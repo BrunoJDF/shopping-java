@@ -17,6 +17,7 @@ public class CreateClientController extends ClientAbstractController {
 
   @PostMapping
   public ResponseEntity<ClientResponse> createClient(@RequestBody CreateClientRequest client) {
-    return ResponseEntity.ok(createClientUseCase.createClient(client));
+    ClientResponse responseClient = createClientUseCase.createClient(client);
+    return ResponseEntity.ok(responseClient);
   }
 }

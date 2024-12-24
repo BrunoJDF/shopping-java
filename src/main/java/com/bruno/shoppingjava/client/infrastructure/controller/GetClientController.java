@@ -18,13 +18,13 @@ public class GetClientController extends ClientAbstractController {
 
   @GetMapping("/{id}")
   public ResponseEntity<ClientResponse> getClient(@PathVariable Long id) {
-    var body = getClientUseCase.getClient(id);
+    ClientResponse body = getClientUseCase.getClient(id);
     return ResponseEntity.ok(body);
   }
 
   @GetMapping
   public ResponseEntity<List<ClientResponse>> getAllClients() {
-    var body = getClientUseCase.getAllClients();
+    List<ClientResponse> body = getClientUseCase.getAllClients();
     return ResponseEntity.ok(body);
   }
 }

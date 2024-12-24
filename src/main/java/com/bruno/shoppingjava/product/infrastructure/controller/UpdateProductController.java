@@ -18,7 +18,7 @@ public class UpdateProductController extends ProductAbstractController {
 
   @PatchMapping("/{id}")
   public ResponseEntity<ProductResponse> updateProduct(@RequestBody UpdateProductRequest request, @PathVariable Long id) {
-    var data = updateProductUseCase.updateProduct(request, id);
+    ProductResponse data = updateProductUseCase.updateProduct(request, id);
     return ResponseEntity.ok(data);
   }
 }

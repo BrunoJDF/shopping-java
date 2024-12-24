@@ -18,7 +18,7 @@ public class CreateProductController extends ProductAbstractController {
 
   @PostMapping
   public ResponseEntity<ProductResponse> createProduct(@RequestBody CreateProductRequest request) {
-    var data = createProductUseCase.create(request);
+    ProductResponse data = createProductUseCase.create(request);
     return ResponseEntity.ok(data);
   }
 }
