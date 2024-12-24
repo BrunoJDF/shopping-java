@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UpdateProductController extends ProductAbstractController {
   private final UpdateProductUseCase updateProductUseCase;
 
-  @PatchMapping("/update/{id}")
+  @PatchMapping("/{id}")
   public ResponseEntity<ProductResponse> updateProduct(@RequestBody UpdateProductRequest request, @PathVariable Long id) {
     var data = updateProductUseCase.updateProduct(request, id);
     return ResponseEntity.ok(data);
