@@ -11,5 +11,7 @@ services:
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-pwd}
       POSTGRES_DB: ${POSTGRES_DB:-shopping-cart}
     volumes:
-      - ./data/db-shopping-cart:/var/lib/postgresql/data
+      - postgres_data:/var/lib/postgresql/data
     restart: always
+volumes:
+  postgres_data:
