@@ -10,4 +10,6 @@ public interface ClientRepository {
   List<Client> findAll();
 
   Client update(Client clientToUpdate);
+
+  Boolean delete(Long id);
 }

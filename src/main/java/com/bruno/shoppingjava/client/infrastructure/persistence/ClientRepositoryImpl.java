@@ -36,6 +36,16 @@ public class ClientRepositoryImpl implements ClientRepository {
     return save(clientToUpdate);
   }
 
+  @Override
+  public Boolean delete(Long id) {
+    return crudClientRepository.findById(id)
+      .map(client -> {
+        crudClientRepository.delete(client);
+        return true;
+      })
+      .orElse(false);
+  }
+
   private Client save(Client client) {
     return crudClientRepository.save(client);
   }
