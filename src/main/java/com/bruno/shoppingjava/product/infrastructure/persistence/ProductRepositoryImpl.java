@@ -30,4 +30,14 @@ public class ProductRepositoryImpl implements ProductRepository {
         new ShoppingNotFoundException(Product.class)
       );
   }
+
+  @Override
+  public boolean deleteById(Long id) {
+    return crudProductRepository.findById(id)
+      .map(product -> {
+        crudProductRepository.delete(product);
+        return true;
+      })
+      .orElse(false);
+  }
 }
