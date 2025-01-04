@@ -22,18 +22,18 @@ public class CreateInvoiceRequest {
   public Invoice toInvoiceDomain() {
     return Optional.of(this)
       .map(inv -> {
-        BigDecimal igv =
-          subTotalPrice.multiply(new BigDecimal("0.18"));
-        BigDecimal totalPrice =
-          subTotalPrice.add(igv);
-        return Invoice.builder()
-            .sub_total_price(inv.getSubTotalPrice())
+          BigDecimal igv =
+            subTotalPrice.multiply(new BigDecimal("0.18"));
+          BigDecimal totalPrice =
+            subTotalPrice.add(igv);
+          return Invoice.builder()
+            .subTotalPrice(inv.getSubTotalPrice())
             .igv(igv)
-            .total_price(totalPrice)
-            .creation_date(ZonedDateTime.now())
-            .modification_date(ZonedDateTime.now())
-            .emission_date(ZonedDateTime.now())
-            .expiration_date(ZonedDateTime.now().plusDays(2))
+            .totalPrice(totalPrice)
+            .creationDate(ZonedDateTime.now())
+            .modificationDate(ZonedDateTime.now())
+            .emissionDate(ZonedDateTime.now())
+            .expirationDate(ZonedDateTime.now().plusDays(2))
             .status(InvoiceStatus.PENDING.getDescription())
             .build();
         }

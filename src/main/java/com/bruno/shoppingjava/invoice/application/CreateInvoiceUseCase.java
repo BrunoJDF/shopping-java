@@ -27,7 +27,7 @@ public class CreateInvoiceUseCase {
     String invoiceCode = generateCodInvoiceUseCase.generateInvoiceCode()
       .orElseThrow(() -> new ShoppingRuntimeException("Error generating invoice code"));
 
-    invoiceToSave.setCod_invoice(invoiceCode);
+    invoiceToSave.setCodInvoice(invoiceCode);
     invoiceToSave.setClient(client);
 
     LOGGER.info("Creating invoice with code: {}", invoiceToSave);

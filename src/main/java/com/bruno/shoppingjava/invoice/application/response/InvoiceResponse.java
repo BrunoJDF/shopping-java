@@ -29,12 +29,12 @@ public class InvoiceResponse {
     ClientResponse clientResponse = ClientResponse.toResponse(savedInvoice.getClient());
     return InvoiceResponse.builder()
       .id(savedInvoice.getId())
-      .codInvoice(savedInvoice.getCod_invoice())
-      .subTotalPrice(savedInvoice.getSub_total_price())
+      .codInvoice(savedInvoice.getCodInvoice())
+      .subTotalPrice(savedInvoice.getSubTotalPrice())
       .igv(savedInvoice.getIgv())
-      .totalPrice(savedInvoice.getTotal_price())
-      .emissionDate(savedInvoice.getEmission_date())
-      .expirationDate(savedInvoice.getExpiration_date())
+      .totalPrice(savedInvoice.getTotalPrice())
+      .emissionDate(savedInvoice.getEmissionDate())
+      .expirationDate(savedInvoice.getExpirationDate())
       .status(savedInvoice.getStatus())
       .client(clientResponse)
       .build();
