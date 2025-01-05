@@ -1,3 +1,5 @@
+server:
+  port: 8080
 spring:
   application:
     name: spring-shopping-cart-java
@@ -17,9 +19,10 @@ spring:
     password: pwd
   webflux:
     base-path: /api
-server:
-  port: 8080
 logging:
   level:
     root: warn
     com.bruno.shoppingjava: debug
+shopping-cart-properties:
+  sql:
+    schema-context: "shopping-cart"

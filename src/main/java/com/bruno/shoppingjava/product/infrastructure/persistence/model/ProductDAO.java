@@ -1,6 +1,8 @@
 package com.bruno.shoppingjava.product.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.product.domain.Product;
+import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,12 +22,14 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
-@Table(name = "product", schema = "shopping_cart")
+@Table(name = ProductDAO.SQLProduct.TABLE_NAME, schema = SQLConstants.SCHEMA)
 public class ProductDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = SQLProduct.NAME)
   private String name;
+  @Column(name = SQLProduct.PRICE)
   private BigDecimal price;
 
   public static ProductDAO fromDomain(Product product) {
@@ -42,5 +46,16 @@ public class ProductDAO {
       .name(this.name)
       .price(this.price)
       .build();
+  }
+
+  static class SQLProduct {
+    static final String TABLE_NAME = "product";
+
+    private SQLProduct() {
+      throw new IllegalStateException("Utility class");
+    }
+
+    static final String NAME = "name";
+    static final String PRICE = "price";
   }
 }

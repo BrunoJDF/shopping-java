@@ -2,6 +2,7 @@ package com.bruno.shoppingjava.client.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.client.domain.Client;
 import com.bruno.shoppingjava.invoice.infrastructure.persistence.model.InvoiceDAO;
+import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,20 +24,26 @@ import java.util.List;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
-@Table(name = "client", schema = "shopping_cart")
+@Table(name = ClientDAO.SQLClient.TABLE_NAME, schema = SQLConstants.SCHEMA)
 public class ClientDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
+  @Column(name = SQLClient.NAME)
   private String name;
-  @Column(name = "last_name")
+  @Column(name = SQLClient.LAST_NAME)
   private String lastName;
-  @Column(name = "full_name")
+  @Column(name = SQLClient.FULL_NAME)
   private String fullName;
+  @Column(name = SQLClient.RUC)
   private String ruc;
+  @Column(name = SQLClient.EMAIL)
   private String email;
+  @Column(name = SQLClient.PHONE)
   private String phone;
+  @Column(name = SQLClient.ADDRESS)
   private String address;
+  @Column(name = SQLClient.STATUS)
   private String status;
 
   // relationship with invoice
@@ -69,5 +76,22 @@ public class ClientDAO {
       .address(address)
       .status(status)
       .build();
+  }
+
+  static class SQLClient {
+    static final String TABLE_NAME = "client";
+
+    private SQLClient() {
+      throw new IllegalStateException("Utility class");
+    }
+
+    static final String NAME = "name";
+    static final String LAST_NAME = "last_name";
+    static final String FULL_NAME = "full_name";
+    static final String RUC = "ruc";
+    static final String EMAIL = "email";
+    static final String PHONE = "phone";
+    static final String ADDRESS = "address";
+    static final String STATUS = "status";
   }
 }
