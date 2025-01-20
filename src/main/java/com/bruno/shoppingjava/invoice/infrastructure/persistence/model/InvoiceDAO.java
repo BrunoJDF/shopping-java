@@ -1,8 +1,8 @@
 package com.bruno.shoppingjava.invoice.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.client.infrastructure.persistence.model.ClientDAO;
-import com.bruno.shoppingjava.detail_invoice.infrastructure.persistence.model.DetailInvoiceDAO;
 import com.bruno.shoppingjava.invoice.domain.Invoice;
+import com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model.InvoiceDetailDAO;
 import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,7 +59,7 @@ public class InvoiceDAO {
   private ClientDAO client;
   // Detail relationship
   @OneToMany(mappedBy = "invoice")
-  private List<DetailInvoiceDAO> details;
+  private List<InvoiceDetailDAO> details;
 
   public static InvoiceDAO fromDomain(Invoice toSave) {
     return InvoiceDAO.builder()

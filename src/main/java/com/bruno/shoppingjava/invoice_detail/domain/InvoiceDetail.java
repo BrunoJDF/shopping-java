@@ -1,4 +1,4 @@
-package com.bruno.shoppingjava.detail_invoice.domain;
+package com.bruno.shoppingjava.invoice_detail.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,7 +12,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class DetailInvoice {
+public class InvoiceDetail {
   private UUID id;
   private UUID idInvoice;
   private UUID idProduct;

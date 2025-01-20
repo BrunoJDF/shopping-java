@@ -1,7 +1,7 @@
-package com.bruno.shoppingjava.detail_invoice.infrastructure.persistence.model;
+package com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model;
 
-import com.bruno.shoppingjava.detail_invoice.domain.DetailInvoice;
 import com.bruno.shoppingjava.invoice.infrastructure.persistence.model.InvoiceDAO;
+import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetail;
 import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -26,8 +26,8 @@ import java.util.UUID;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
-@Table(name = DetailInvoiceDAO.SQLDetailInvoice.TABLE_NAME, schema = SQLConstants.SCHEMA)
-public class DetailInvoiceDAO {
+@Table(name = InvoiceDetailDAO.SQLDetailInvoice.TABLE_NAME, schema = SQLConstants.SCHEMA)
+public class InvoiceDetailDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private UUID id;
@@ -46,19 +46,19 @@ public class DetailInvoiceDAO {
   @JoinColumn(name = "id_invoice", nullable = false, insertable = false, updatable = false)
   private InvoiceDAO invoice;
 
-  public static DetailInvoiceDAO fromDetailInvoice(DetailInvoice detailInvoice) {
-    return DetailInvoiceDAO.builder()
-      .id(detailInvoice.getId())
-      .idInvoice(detailInvoice.getIdInvoice())
-      .idProduct(detailInvoice.getIdProduct())
-      .quantity(detailInvoice.getQuantity())
-      .price(detailInvoice.getPrice())
-      .total(detailInvoice.getTotal())
+  public static InvoiceDetailDAO fromDetailInvoice(InvoiceDetail invoiceDetail) {
+    return InvoiceDetailDAO.builder()
+      .id(invoiceDetail.getId())
+      .idInvoice(invoiceDetail.getIdInvoice())
+      .idProduct(invoiceDetail.getIdProduct())
+      .quantity(invoiceDetail.getQuantity())
+      .price(invoiceDetail.getPrice())
+      .total(invoiceDetail.getTotal())
       .build();
   }
 
-  public DetailInvoice toDomain() {
-    return DetailInvoice.builder()
+  public InvoiceDetail toDomain() {
+    return InvoiceDetail.builder()
       .id(this.id)
       .idInvoice(this.idInvoice)
       .idProduct(this.idProduct)
