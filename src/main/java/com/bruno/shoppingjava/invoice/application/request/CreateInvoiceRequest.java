@@ -16,14 +16,16 @@ import java.util.Optional;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateInvoiceRequest {
+  private static final String IGV = "0.18";
   private BigDecimal subTotalPrice;
   private Long clientId;
+  private CreateDetailInvoiceDTO detailInvoice;
 
   public Invoice toInvoiceDomain() {
     return Optional.of(this)
       .map(inv -> {
           BigDecimal igv =
-            subTotalPrice.multiply(new BigDecimal("0.18"));
+            subTotalPrice.multiply(new BigDecimal(IGV));
           BigDecimal totalPrice =
             subTotalPrice.add(igv);
           return Invoice.builder()
