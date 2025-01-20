@@ -18,7 +18,6 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @Builder
@@ -30,11 +29,11 @@ import java.util.UUID;
 public class InvoiceDetailDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private UUID id;
+  private Long id;
   @Column(name = SQLDetailInvoice.ID_INVOICE)
-  private UUID idInvoice;
+  private Long idInvoice;
   @Column(name = SQLDetailInvoice.ID_PRODUCT)
-  private UUID idProduct;
+  private Long idProduct;
   @Column(name = SQLDetailInvoice.QUANTITY)
   private Integer quantity;
   @Column(name = SQLDetailInvoice.PRICE)

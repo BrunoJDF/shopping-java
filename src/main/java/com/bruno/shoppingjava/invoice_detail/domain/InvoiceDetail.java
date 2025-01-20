@@ -6,14 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
-import java.util.UUID;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class InvoiceDetail {
-  private UUID id;
+  private Long id;
   private Long idInvoice;
   private Long idProduct;
   private Integer quantity;

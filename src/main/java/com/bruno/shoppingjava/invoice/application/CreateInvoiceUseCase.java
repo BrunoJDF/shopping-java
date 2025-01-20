@@ -2,6 +2,7 @@ package com.bruno.shoppingjava.invoice.application;
 
 import com.bruno.shoppingjava.client.domain.Client;
 import com.bruno.shoppingjava.client.domain.ClientRepository;
+import com.bruno.shoppingjava.invoice.application.request.CreateDetailInvoiceDTO;
 import com.bruno.shoppingjava.invoice.application.request.CreateInvoiceRequest;
 import com.bruno.shoppingjava.invoice.application.response.InvoiceResponse;
 import com.bruno.shoppingjava.invoice.domain.Invoice;
@@ -40,7 +41,7 @@ public class CreateInvoiceUseCase {
 
     var invoiceDetails = request.getDetails()
       .stream()
-      .map(createDetailInvoiceDTO -> createDetailInvoiceDTO.toInvoiceDetailDomain())
+      .map(CreateDetailInvoiceDTO::toInvoiceDetailDomain)
       .toList();
 
     createInvoiceDetailUseCase.createAll(invoiceDetails, savedInvoice);
