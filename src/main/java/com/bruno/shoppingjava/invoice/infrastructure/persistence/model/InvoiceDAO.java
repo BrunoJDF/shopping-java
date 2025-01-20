@@ -1,6 +1,7 @@
 package com.bruno.shoppingjava.invoice.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.client.infrastructure.persistence.model.ClientDAO;
+import com.bruno.shoppingjava.detail_invoice.infrastructure.persistence.model.DetailInvoiceDAO;
 import com.bruno.shoppingjava.invoice.domain.Invoice;
 import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,6 +21,7 @@ import lombok.experimental.FieldNameConstants;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -54,6 +57,9 @@ public class InvoiceDAO {
   @ManyToOne
   @JoinColumn(name = "id_client")
   private ClientDAO client;
+  // Detail relationship
+  @OneToMany(mappedBy = "invoice")
+  private List<DetailInvoiceDAO> details;
 
   public static InvoiceDAO fromDomain(Invoice toSave) {
     return InvoiceDAO.builder()
