@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.ZonedDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Data
@@ -19,7 +20,7 @@ public class CreateInvoiceRequest {
   private static final String IGV = "0.18";
   private BigDecimal subTotalPrice;
   private Long clientId;
-  private CreateDetailInvoiceDTO detailInvoice;
+  private List<CreateDetailInvoiceDTO> details;
 
   public Invoice toInvoiceDomain() {
     return Optional.of(this)

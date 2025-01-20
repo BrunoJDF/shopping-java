@@ -14,8 +14,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class InvoiceDetail {
   private UUID id;
-  private UUID idInvoice;
-  private UUID idProduct;
+  private Long idInvoice;
+  private Long idProduct;
   private Integer quantity;
   private BigDecimal price;
   private BigDecimal total;
