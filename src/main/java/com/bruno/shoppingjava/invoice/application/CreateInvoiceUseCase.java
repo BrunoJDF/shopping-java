@@ -8,6 +8,9 @@ import com.bruno.shoppingjava.invoice.application.response.InvoiceResponse;
 import com.bruno.shoppingjava.invoice.domain.Invoice;
 import com.bruno.shoppingjava.invoice.domain.InvoiceRepository;
 import com.bruno.shoppingjava.invoice_detail.application.CreateInvoiceDetailUseCase;
+import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetail;
+import com.bruno.shoppingjava.product.domain.Product;
+import com.bruno.shoppingjava.product.domain.ProductRepository;
 import com.bruno.shoppingjava.shared.application.exception.ShoppingRuntimeException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +22,7 @@ import org.springframework.stereotype.Service;
 public class CreateInvoiceUseCase {
   private final InvoiceRepository repository;
   private final ClientRepository clientRepository;
+  private final ProductRepository productRepository;
   private final GenerateCodInvoiceUseCase generateCodInvoiceUseCase;
   private final CreateInvoiceDetailUseCase createInvoiceDetailUseCase;
 
@@ -41,12 +45,22 @@ public class CreateInvoiceUseCase {
 
     var invoiceDetails = request.getDetails()
       .stream()
-      .map(CreateDetailInvoiceDTO::toInvoiceDetailDomain)
+      .map(createDetailInvoiceDTO -> buildInvoiceDetail(createDetailInvoiceDTO, savedInvoice))
       .toList();
 
-    createInvoiceDetailUseCase.createAll(invoiceDetails, savedInvoice);
+    createInvoiceDetailUseCase.createAll(invoiceDetails);
 
 
     return InvoiceResponse.toResponse(savedInvoice);
+  }
+
+  private InvoiceDetail buildInvoiceDetail(CreateDetailInvoiceDTO createDetailInvoiceDTO, Invoice savedInvoice) {
+    Product product = productRepository.findById(createDetailInvoiceDTO.idProduct());
+    return InvoiceDetail.builder()
+      .idProduct(product.getId())
+      .quantity(createDetailInvoiceDTO.quantity())
+      .price(product.getPrice())
+      .idInvoice(savedInvoice.getId())
+      .build();
   }
 }

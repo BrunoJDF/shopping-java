@@ -2,6 +2,7 @@ package com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.invoice.infrastructure.persistence.model.InvoiceDAO;
 import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetail;
+import com.bruno.shoppingjava.product.infrastructure.persistence.model.ProductDAO;
 import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -45,6 +46,10 @@ public class InvoiceDetailDAO {
   @JoinColumn(name = "id_invoice", nullable = false, insertable = false, updatable = false)
   private InvoiceDAO invoice;
 
+  @ManyToOne
+  @JoinColumn(name = "id_product", nullable = false, insertable = false, updatable = false)
+  private ProductDAO product;
+
   public static InvoiceDetailDAO fromDetailInvoice(InvoiceDetail invoiceDetail) {
     return InvoiceDetailDAO.builder()
       .id(invoiceDetail.getId())
@@ -68,7 +73,7 @@ public class InvoiceDetailDAO {
   }
 
   static class SQLDetailInvoice {
-    static final String TABLE_NAME = "detail_invoice";
+    static final String TABLE_NAME = "invoice_detail";
 
     private SQLDetailInvoice() {
       throw new IllegalStateException("Utility class");

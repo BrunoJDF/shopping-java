@@ -3,10 +3,10 @@ package com.bruno.shoppingjava.invoice_detail.infrastructure.persistence;
 import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetail;
 import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetailRepository;
 import com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model.InvoiceDetailDAO;
+import com.bruno.shoppingjava.shared.application.exception.ShoppingNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -23,8 +23,11 @@ public class InvoiceDetailRepositoryImpl implements InvoiceDetailRepository {
   }
 
   @Override
-  public Optional<InvoiceDetail> findById(String id) {
+  public InvoiceDetail findById(String id) {
     return crudInvoiceDetailRepository.findById(UUID.fromString(id))
-      .map(InvoiceDetailDAO::toDomain);
+      .map(InvoiceDetailDAO::toDomain)
+      .orElseThrow(() ->
+        new ShoppingNotFoundException(InvoiceDetail.class)
+      );
   }
 }
