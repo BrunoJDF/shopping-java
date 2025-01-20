@@ -16,6 +16,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -43,7 +46,7 @@ public class CreateInvoiceUseCase {
 
     // Create invoice details
 
-    var invoiceDetails = request.getDetails()
+    List<InvoiceDetail> invoiceDetails = request.getDetails()
       .stream()
       .map(createDetailInvoiceDTO -> buildInvoiceDetail(createDetailInvoiceDTO, savedInvoice))
       .toList();
@@ -56,11 +59,13 @@ public class CreateInvoiceUseCase {
 
   private InvoiceDetail buildInvoiceDetail(CreateDetailInvoiceDTO createDetailInvoiceDTO, Invoice savedInvoice) {
     Product product = productRepository.findById(createDetailInvoiceDTO.idProduct());
+    BigDecimal total = product.getPrice().multiply(BigDecimal.valueOf(createDetailInvoiceDTO.quantity()));
     return InvoiceDetail.builder()
       .idProduct(product.getId())
       .quantity(createDetailInvoiceDTO.quantity())
       .price(product.getPrice())
       .idInvoice(savedInvoice.getId())
+      .total(total)
       .build();
   }
 }

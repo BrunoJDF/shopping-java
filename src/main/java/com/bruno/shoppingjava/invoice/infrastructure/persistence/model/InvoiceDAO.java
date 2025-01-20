@@ -1,5 +1,6 @@
 package com.bruno.shoppingjava.invoice.infrastructure.persistence.model;
 
+import com.bruno.shoppingjava.client.domain.Client;
 import com.bruno.shoppingjava.client.infrastructure.persistence.model.ClientDAO;
 import com.bruno.shoppingjava.invoice.domain.Invoice;
 import com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model.InvoiceDetailDAO;
@@ -62,6 +63,7 @@ public class InvoiceDAO {
   private List<InvoiceDetailDAO> details;
 
   public static InvoiceDAO fromDomain(Invoice toSave) {
+    ClientDAO clientDAO = ClientDAO.fromDomain(toSave.getClient());
     return InvoiceDAO.builder()
       .id(toSave.getId())
       .codInvoice(toSave.getCodInvoice())
@@ -73,21 +75,24 @@ public class InvoiceDAO {
       .creationDate(toSave.getCreationDate())
       .modificationDate(toSave.getModificationDate())
       .status(toSave.getStatus())
+      .client(clientDAO)
       .build();
   }
 
   public Invoice toDomain() {
+    Client clientDomain = client.toDomain();
     return Invoice.builder()
-      .id(this.id)
-      .codInvoice(this.codInvoice)
-      .subTotalPrice(this.subTotalPrice)
-      .igv(this.igv)
-      .totalPrice(this.totalPrice)
-      .emissionDate(this.emissionDate)
-      .expirationDate(this.expirationDate)
-      .creationDate(this.creationDate)
-      .modificationDate(this.modificationDate)
-      .status(this.status)
+      .id(id)
+      .codInvoice(codInvoice)
+      .subTotalPrice(subTotalPrice)
+      .igv(igv)
+      .totalPrice(totalPrice)
+      .emissionDate(emissionDate)
+      .expirationDate(expirationDate)
+      .creationDate(creationDate)
+      .modificationDate(modificationDate)
+      .status(status)
+      .client(clientDomain)
       .build();
   }
 
