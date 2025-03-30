@@ -3,6 +3,7 @@ package com.bruno.shoppingjava.invoice.infrastructure.controller;
 import com.bruno.shoppingjava.invoice.application.CreateInvoiceUseCase;
 import com.bruno.shoppingjava.invoice.application.request.CreateInvoiceRequest;
 import com.bruno.shoppingjava.invoice.application.response.InvoiceResponse;
+import com.bruno.shoppingjava.invoice.infrastructure.controller.parent.InvoiceAbstractController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
