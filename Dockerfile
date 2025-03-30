@@ -1,12 +1,10 @@
-FROM eclipse-temurin:17
+FROM eclipse-temurin:17-alpine
 
 WORKDIR /app
 
 COPY . /app
 
-RUN ./mvnw clean package
-
-RUN ls -l target/
+RUN chmod +x ./mvnw && ./mvnw clean package
 
 COPY target/shopping-java.jar /app.jar
 
