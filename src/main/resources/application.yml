@@ -14,9 +14,9 @@ spring:
       schema-locations: classpath:schema.sql
       mode: always
   datasource:
-    url: jdbc:postgresql://${db_host:localhost}}:${db_port:5434}/${db_name:shopping_cart}
-    username: ${db_user:root}
-    password: ${db_password:pwd}
+    url: jdbc:postgresql://${DB_HOST}}:${DB_PORT}/${DB_NAME}?sslmode=require
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
   webflux:
     base-path: /api
 logging:
