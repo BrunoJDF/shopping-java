@@ -14,7 +14,7 @@ spring:
       schema-locations: classpath:schema.sql
       mode: always
   datasource:
-    url: ${NF_DB_SHOPPING_CART_POSTGRES_URI:jdbc:postgresql://localhost:5434/shopping-cart}
+    url: jdbc:${NF_DB_SHOPPING_CART_POSTGRES_URI:postgresql://localhost:5434/shopping-cart}
     username: ${NF_DB_SHOPPING_CART_USERNAME:root}
     password: ${NF_DB_SHOPPING_CART_PASSWORD:pwd}
   webflux:
