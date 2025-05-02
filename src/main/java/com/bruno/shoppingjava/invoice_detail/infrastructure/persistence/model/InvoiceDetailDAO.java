@@ -3,7 +3,6 @@ package com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model;
 import com.bruno.shoppingjava.invoice.infrastructure.persistence.model.InvoiceDAO;
 import com.bruno.shoppingjava.invoice_detail.domain.InvoiceDetail;
 import com.bruno.shoppingjava.product.infrastructure.persistence.model.ProductDAO;
-import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +25,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
-@Table(name = InvoiceDetailDAO.SQLDetailInvoice.TABLE_NAME, schema = SQLConstants.SCHEMA)
+@Table(name = InvoiceDetailDAO.SQLDetailInvoice.TABLE_NAME)
 public class InvoiceDetailDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
