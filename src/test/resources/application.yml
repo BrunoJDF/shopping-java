@@ -3,13 +3,19 @@ spring:
     active: test
   application:
     name: spring-shopping-cart-java
+  liquibase:
+    change-log: classpath:db/db.changelog-master.xml
+    enabled: true
+    default-schema: ${shopping-cart-properties.sql.schema-context}
+    parameters:
+      schema: ${shopping-cart-properties.sql.schema-context}
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: shopping_cart_test
+        default_schema: ${shopping-cart-properties.sql.schema-context}
   sql:
     init:
       schema-locations: classpath:schema_test.sql
@@ -26,4 +32,4 @@ logging:
     com.bruno.shoppingjava: debug
 shopping-cart-properties:
   sql:
-    schema-context: "shopping-cart-test"
+    schema-context: "shopping_cart_test"
