@@ -31,7 +31,7 @@ public class ProductDAO {
   private Long id;
   @Column(name = SQLProduct.NAME)
   private String name;
-  @Column(name = SQLProduct.PRICE)
+  @Column(name = SQLProduct.PRICE, precision = 14, scale = 3)
   private BigDecimal price;
 
   @OneToMany(mappedBy = "product")

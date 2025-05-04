@@ -1,8 +1,6 @@
-server:
-  port: 8080
 spring:
   profiles:
-    active: local
+    active: test
   application:
     name: spring-shopping-cart-java
   jpa:
@@ -11,10 +9,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
-        default_schema: shopping_cart
+        default_schema: shopping_cart_test
   sql:
     init:
-      schema-locations: classpath:schema.sql
+      schema-locations: classpath:schema_test.sql
       mode: always
   datasource:
     url: jdbc:${NF_DB_SHOPPING_CART_POSTGRES_URI:postgresql://localhost:5434/shopping-cart}
@@ -28,4 +26,4 @@ logging:
     com.bruno.shoppingjava: debug
 shopping-cart-properties:
   sql:
-    schema-context: "shopping-cart"
+    schema-context: "shopping-cart-test"

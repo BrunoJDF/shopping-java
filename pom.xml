@@ -27,6 +27,7 @@
     <url/>
   </scm>
   <properties>
+    <net.datafaker.version>2.1.0</net.datafaker.version>
     <java.version>17</java.version>
   </properties>
   <dependencies>
@@ -81,7 +82,7 @@
     <dependency>
       <groupId>net.datafaker</groupId>
       <artifactId>datafaker</artifactId>
-      <version>2.1.0</version>
+      <version>${net.datafaker.version}</version>
       <scope>test</scope>
     </dependency>
     <!-- Orika
