@@ -16,5 +16,34 @@
         <constraints nullable="false"/>
       </column>
     </createTable>
+    <createTable tableName="client">
+      <column name="id" type="serial">
+        <constraints primaryKey="true" nullable="false"/>
+      </column>
+      <column name="name" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="last_name" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="full_name" type="varchar(200)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="ruc" type="varchar(20)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="email" type="varchar(100)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="phone" type="varchar(20)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="address" type="varchar(200)">
+        <constraints nullable="false"/>
+      </column>
+      <column name="status" type="varchar(20)">
+        <constraints nullable="false"/>
+      </column>
+    </createTable>
   </changeSet>
 </databaseChangeLog>

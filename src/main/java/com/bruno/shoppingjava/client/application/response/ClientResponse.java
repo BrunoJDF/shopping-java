@@ -25,10 +25,9 @@ public class ClientResponse {
   private String status;
 
   public static ClientResponse toResponse(Client client) {
-    var status = Optional.ofNullable(client.getStatus())
-      .filter(s -> s.equalsIgnoreCase(ClientStatus.ACTIVE.getDescription()))
-      .map(s -> ClientStatus.ACTIVE.getDescription())
-      .orElse(ClientStatus.INACTIVE.getDescription());
+    ClientStatus status = Optional.ofNullable(client.getStatus())
+      .map(s -> ClientStatus.valueOf(s.getDescription()))
+      .orElse(ClientStatus.INACTIVE);
 
     return Optional.of(client)
       .map(c -> ClientResponse.builder()
@@ -40,7 +39,7 @@ public class ClientResponse {
         .email(c.getEmail())
         .phone(c.getPhone())
         .address(c.getAddress())
-        .status(status)
+        .status(status.getDescription())
         .build()
       ).orElse(null);
   }

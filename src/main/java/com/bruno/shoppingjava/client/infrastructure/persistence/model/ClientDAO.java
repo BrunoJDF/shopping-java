@@ -1,9 +1,12 @@
 package com.bruno.shoppingjava.client.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.client.domain.Client;
+import com.bruno.shoppingjava.client.domain.ClientStatus;
 import com.bruno.shoppingjava.invoice.infrastructure.persistence.model.InvoiceDAO;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -43,7 +46,8 @@ public class ClientDAO {
   @Column(name = SQLClient.ADDRESS)
   private String address;
   @Column(name = SQLClient.STATUS)
-  private String status;
+  @Enumerated(EnumType.STRING)
+  private ClientStatus status;
 
   // relationship with invoice
   @OneToMany(mappedBy = "client")
