@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: test,postgres
   application:
     name: spring-shopping-cart-java
   liquibase:
