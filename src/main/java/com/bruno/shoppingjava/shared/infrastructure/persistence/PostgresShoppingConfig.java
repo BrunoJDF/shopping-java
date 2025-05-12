@@ -27,6 +27,7 @@ public class PostgresShoppingConfig implements BeanPostProcessor {
       try (Connection conn = dataSource.getConnection();
            Statement statement = conn.createStatement()) {
         String sql = String.format("CREATE SCHEMA IF NOT EXISTS %s;", schemaName);
+        LOGGER.info("Before initialization {}, Sql Statement: {}", bean.getClass().getSimpleName(), sql);
         statement.execute(sql);
         LOGGER.info("After initialization {}", bean.getClass().getSimpleName());
       } catch (SQLException e) {
