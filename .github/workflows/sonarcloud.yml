@@ -39,7 +39,7 @@ permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
 
 jobs:
-  sonarQube-task:
+  Analysis:
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -51,8 +51,6 @@ jobs:
     env:
       PROJECT_KEY: BrunoJDF_shopping-java
       ORG_KEY: brunojdf
-  Analysis:
-    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
