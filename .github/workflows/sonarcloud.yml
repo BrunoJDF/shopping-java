@@ -47,11 +47,9 @@ jobs:
       pull-requests: write
     timeout-minutes: 20
     name: Scan repository for issues using SonarQube
-
     env:
       PROJECT_KEY: BrunoJDF_shopping-java
       ORG_KEY: brunojdf
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
