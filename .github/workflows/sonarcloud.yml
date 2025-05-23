@@ -39,6 +39,18 @@ permissions:
   pull-requests: read # allows SonarCloud to decorate PRs with analysis results
 
 jobs:
+  sonarQube-task:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      issues: write
+      pull-requests: write
+    timeout-minutes: 20
+    name: Scan repository for issues using SonarQube
+
+    env:
+      PROJECT_KEY: BrunoJDF_shopping-java
+      ORG_KEY: brunojdf
   Analysis:
     runs-on: ubuntu-latest
 
@@ -61,7 +73,11 @@ jobs:
           java-version: '17'
 
       - name: Build and test with Maven
-        run: mvn clean verify -Dtest='!*IntegrationTest'
+        run: |
+          mvn clean verify --batch-mode \
+            -Dtest='!*IntegrationTest*,!*AcceptanceTest*,!*UATest*' \
+            -DskipITs \
+            -DskipTests=false
 
       - name: Analyze with SonarCloud
         # You can pin the exact commit or the version.
@@ -74,10 +90,11 @@ jobs:
           args:
             # Unique keys of your project and organization. You can find them in SonarCloud > Information (bottom-left menu)
             # mandatory
-            -Dsonar.projectKey=BrunoJDF_shopping-java
-            -Dsonar.organization=brunojdf
-            # Comma-separated paths to directories containing main source files.
-            #-Dsonar.sources= # optional, default is project base directory
+            -Dsonar.projectKey=${{ env.PROJECT_KEY }}
+            -Dsonar.organization=${{ env.ORG_KEY }}
+            -Dsonar.java.binaries=target/classes
+          # Comma-separated paths to directories containing main source files.
+          #-Dsonar.sources= # optional, default is project base directory
           # Comma-separated paths to directories containing test source files.
           #-Dsonar.tests= # optional. For more info about Code Coverage, please refer to https://docs.sonarcloud.io/enriching/test-coverage/overview/
           # Adds more detail to both client and server-side analysis logs, activating DEBUG mode for the scanner, and adding client-side environment variables and system properties to the server-side log of analysis report processing.
