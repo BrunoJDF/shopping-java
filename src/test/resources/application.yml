@@ -1,8 +1,6 @@
-server:
-  port: 8080
 spring:
   profiles:
-    active: ${PROFILE_ACTIVE:local},postgres
+    active: test,postgres
   application:
     name: spring-shopping-cart-java
   liquibase:
@@ -20,7 +18,7 @@ spring:
         default_schema: ${shopping-cart-properties.sql.schema-context}
   sql:
     init:
-      schema-locations: classpath:db/scripts/schema.sql
+      schema-locations: classpath:schema_test.sql
       mode: always
   datasource:
     url: jdbc:${NF_DB_SHOPPING_CART_POSTGRES_URI:postgresql://localhost:5434/shopping-cart}
@@ -34,5 +32,4 @@ logging:
     com.bruno.shoppingjava: debug
 shopping-cart-properties:
   sql:
-    schema-context: "shopping_cart"
-
+    schema-context: "shopping_cart_test"

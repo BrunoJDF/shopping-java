@@ -2,7 +2,6 @@ package com.bruno.shoppingjava.product.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.invoice_detail.infrastructure.persistence.model.InvoiceDetailDAO;
 import com.bruno.shoppingjava.product.domain.Product;
-import com.bruno.shoppingjava.shared.infrastructure.persistence.SQLConstants;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -25,7 +24,7 @@ import java.util.List;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
-@Table(name = ProductDAO.SQLProduct.TABLE_NAME, schema = SQLConstants.SCHEMA)
+@Table(name = ProductDAO.SQLProduct.TABLE_NAME)
 public class ProductDAO {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)

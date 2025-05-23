@@ -27,6 +27,7 @@
     <url/>
   </scm>
   <properties>
+    <net.datafaker.version>2.1.0</net.datafaker.version>
     <java.version>17</java.version>
   </properties>
   <dependencies>
@@ -49,11 +50,20 @@
       <scope>runtime</scope>
       <optional>true</optional>
     </dependency>
+    <!-- Database driver -->
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
+    <!--
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    -->
+    <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
@@ -68,6 +78,16 @@
       <groupId>io.projectreactor</groupId>
       <artifactId>reactor-test</artifactId>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>net.datafaker</groupId>
+      <artifactId>datafaker</artifactId>
+      <version>${net.datafaker.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.liquibase</groupId>
+      <artifactId>liquibase-core</artifactId>
     </dependency>
     <!-- Orika
     <dependency>
