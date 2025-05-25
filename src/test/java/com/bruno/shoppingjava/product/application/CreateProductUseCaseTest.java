@@ -25,7 +25,7 @@ class CreateProductUseCaseTest extends ProductUnitTestCase {
 
 
     when(productRepository.save(any()))
-      .thenReturn(request.toProductDomain());
+      .thenReturn(request.toDomain());
 
     systemUnderTest.create(request);
 

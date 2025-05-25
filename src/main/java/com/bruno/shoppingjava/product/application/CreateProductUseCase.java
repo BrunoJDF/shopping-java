@@ -13,7 +13,7 @@ public class CreateProductUseCase {
   private final ProductRepository productRepository;
 
   public ProductResponse create(CreateProductRequest request) {
-    Product saved = productRepository.save(request.toProductDomain());
+    Product saved = productRepository.save(request.toDomain());
     return ProductResponse.toResponse(saved);
   }
 }

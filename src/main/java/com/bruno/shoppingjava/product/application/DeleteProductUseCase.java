@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 public class DeleteProductUseCase {
   private final ProductRepository productRepository;
 
-  public boolean deleteProduct(Long id) {
+  public Boolean deleteProduct(Long id) {
     return productRepository.deleteById(id);
   }
 }
