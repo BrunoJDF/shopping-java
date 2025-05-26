@@ -68,4 +68,5 @@ jobs:
             -Dsonar.scanner.forceAnalysis=false
             -Dsonar.exclusions=**/*DTO.java,**/*DAO.java
             -Dsonar.test.exclusions=**/test/**,**/*Test.java
+            -Dsonar.coverage.exclusions=**/test/**,**/*Test.java
           projectBaseDir: .
