@@ -14,7 +14,7 @@ public class CreateProductRequest {
   private String name;
   private BigDecimal price;
 
-  public Product toProductDomain() {
+  public Product toDomain() {
     return Product.builder()
       .name(name)
       .price(price)
