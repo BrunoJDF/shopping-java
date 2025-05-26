@@ -29,7 +29,7 @@ public abstract class ShoppingCacheManager<K, V> {
     return Optional.ofNullable(this.cache.getIfPresent(key));
   }
 
-  protected V put(K key, V object) {
+  public V put(K key, V object) {
     if (object instanceof Throwable error) {
       LOGGER.error("Cannot get value from cache for key: {}", key, error);
       throw new IllegalArgumentException("Error retrieving value from cache: " + error.getMessage(), error);
@@ -38,7 +38,7 @@ public abstract class ShoppingCacheManager<K, V> {
     return object;
   }
 
-  protected void remove(K key) {
+  public void remove(K key) {
     this.cache.invalidate(key);
   }
 
