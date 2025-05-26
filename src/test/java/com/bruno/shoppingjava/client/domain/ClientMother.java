@@ -3,7 +3,7 @@ package com.bruno.shoppingjava.client.domain;
 import com.bruno.shoppingjava.shared.mother.BigDecimalMother;
 import com.bruno.shoppingjava.shared.mother.WordMother;
 
-import java.util.Random;
+import java.security.SecureRandom;
 
 public class ClientMother {
 
@@ -27,7 +27,7 @@ public class ClientMother {
 
   private static String generateCodeByLength(int i) {
     // Randomly generate a string of digits of length i
-    Random random = new Random();
+    SecureRandom random = new SecureRandom();
     StringBuilder code = new StringBuilder();
     for (int j = 0; j < i; j++) {
       code.append(random.nextInt(10)); // Append a random digit (0-9)
