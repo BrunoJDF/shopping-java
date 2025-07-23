@@ -70,4 +70,16 @@ class ClientCacheManagerTest extends ProductUnitTestCase {
     // Then
     assertEquals(0, systemUnderTest.getCacheSize());
   }
+
+  @Test
+  void shouldPutClientInCache() {
+    // Given
+    var client = ClientMother.random();
+
+    // When
+    var cachedClient = systemUnderTest.put(client.getId(), client);
+
+    // Then
+    assertEquals(client, cachedClient);
+  }
 }
