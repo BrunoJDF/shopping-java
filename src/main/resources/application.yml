@@ -20,8 +20,7 @@ spring:
         default_schema: ${shopping-cart-properties.sql.schema-context}
   sql:
     init:
-      schema-locations: classpath:db/scripts/schema.sql
-      mode: always
+      mode: never
   datasource:
     url: jdbc:${NF_DB_SHOPPING_CART_POSTGRES_URI:postgresql://localhost:5434/shopping-cart}
     username: ${NF_DB_SHOPPING_CART_ADMIN_USERNAME:root}

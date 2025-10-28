@@ -3,6 +3,12 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.27.xsd">
-  <include relativeToChangelogFile="true" file="changelogs/db.changelog-0.1.xml"/>
-  <include relativeToChangelogFile="true" file="changelogs/db.changelog-1.0.xml"/>
+
+  <changeSet id="001-create-schema-and-sequence" author="system">
+    <sql>
+      CREATE SCHEMA IF NOT EXISTS shopping_cart;
+      CREATE SEQUENCE IF NOT EXISTS shopping_cart.invoice_code_seq;
+    </sql>
+  </changeSet>
+
 </databaseChangeLog>
