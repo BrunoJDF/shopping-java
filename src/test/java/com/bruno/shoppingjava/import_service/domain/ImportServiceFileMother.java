@@ -4,6 +4,7 @@ import com.bruno.shoppingjava.shared.mother.BigDecimalMother;
 import com.bruno.shoppingjava.shared.mother.WordMother;
 
 import java.time.OffsetDateTime;
+import java.util.List;
 
 public class ImportServiceFileMother {
   public static ImportServiceFile random() {
@@ -15,5 +16,13 @@ public class ImportServiceFileMother {
       .updatedBy("system")
       .updatedAt(OffsetDateTime.now())
       .build();
+  }
+
+  public static List<ImportServiceFile> randomList() {
+    return List.of(
+      random(),
+      random(),
+      random()
+    );
   }
 }
