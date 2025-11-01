@@ -16,6 +16,8 @@ import java.time.OffsetDateTime;
 public class ImportServiceFile {
   private Long id;
   private String filename;
+  private String createdBy;
   private OffsetDateTime createdAt;
+  private String updatedBy;
   private OffsetDateTime updatedAt;
 }
