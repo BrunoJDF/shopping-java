@@ -15,8 +15,8 @@ public class ImportServiceFileRepositoryImpl implements ImportServiceFileReposit
 
   @Override
   public ImportServiceFile save(ImportServiceFile importServiceFile) {
-    ImportServiceFileDAO importServiceFileDAO = ImportServiceFileDAO.fromDomain(importServiceFile);
-    ImportServiceFileDAO saved = crudImportServiceFileRepository.save(importServiceFileDAO);
+    ImportServiceFileDAO dao = ImportServiceFileDAO.fromDomain(importServiceFile);
+    ImportServiceFileDAO saved = crudImportServiceFileRepository.save(dao);
     return saved.toDomain();
   }
 

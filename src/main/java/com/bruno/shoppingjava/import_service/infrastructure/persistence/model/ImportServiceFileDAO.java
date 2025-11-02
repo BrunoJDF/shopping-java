@@ -5,6 +5,8 @@ import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EntityListeners;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -38,6 +40,8 @@ public class ImportServiceFileDAO {
   private Long id;
   @Column(name = SQLImportService.FILENAME)
   private String filename;
+
+  @Enumerated(EnumType.STRING)
   @Column(name = SQLImportService.STATUS)
   private StatusProcessEnum status;
 
