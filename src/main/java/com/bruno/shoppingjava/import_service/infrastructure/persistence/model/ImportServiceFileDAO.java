@@ -1,6 +1,7 @@
 package com.bruno.shoppingjava.import_service.infrastructure.persistence.model;
 
 import com.bruno.shoppingjava.import_service.domain.ImportServiceFile;
+import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class ImportServiceFileDAO {
   private Long id;
   @Column(name = SQLImportService.FILENAME)
   private String filename;
+  @Column(name = SQLImportService.STATUS)
+  private StatusProcessEnum status;
   @Column(name = SQLImportService.CREATED_BY)
   private String createdBy;
   @Column(name = SQLImportService.CREATED_AT)
@@ -36,15 +39,22 @@ public class ImportServiceFileDAO {
   private String updatedBy;
   @Column(name = SQLImportService.UPDATED_AT)
   private OffsetDateTime updatedAt;
+  @Column(name = SQLImportService.TOTAL_RECORDS)
+  private long totalRecords;
+  @Column(name = SQLImportService.ERROR_MESSAGE)
+  private String errorMessage;
 
   public static ImportServiceFileDAO fromDomain(ImportServiceFile importServiceFile) {
     return ImportServiceFileDAO.builder()
       .id(importServiceFile.getId())
       .filename(importServiceFile.getFilename())
+      .status(importServiceFile.getStatus())
       .createdBy(importServiceFile.getCreatedBy())
       .createdAt(importServiceFile.getCreatedAt())
       .updatedBy(importServiceFile.getUpdatedBy())
       .updatedAt(importServiceFile.getUpdatedAt())
+      .totalRecords(importServiceFile.getTotalRecords())
+      .errorMessage(importServiceFile.getErrorMessage())
       .build();
   }
 
@@ -52,10 +62,13 @@ public class ImportServiceFileDAO {
     return ImportServiceFile.builder()
       .id(this.id)
       .filename(this.filename)
+      .status(this.status)
       .createdBy(this.createdBy)
       .createdAt(this.createdAt)
       .updatedBy(this.updatedBy)
       .updatedAt(this.updatedAt)
+      .totalRecords(this.totalRecords)
+      .errorMessage(this.errorMessage)
       .build();
   }
 
@@ -68,9 +81,12 @@ public class ImportServiceFileDAO {
     }
 
     static final String FILENAME = "filename";
+    static final String STATUS = "status";
     static final String CREATED_BY = "created_by";
     static final String CREATED_AT = "created_at";
     static final String UPDATED_BY = "updated_by";
     static final String UPDATED_AT = "updated_at";
+    static final String TOTAL_RECORDS = "total_records";
+    static final String ERROR_MESSAGE = "error_message";
   }
 }
