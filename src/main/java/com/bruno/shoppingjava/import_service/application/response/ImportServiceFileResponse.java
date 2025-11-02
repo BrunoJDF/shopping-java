@@ -6,6 +6,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.OffsetDateTime;
+
 @Data
 @Builder
 @NoArgsConstructor
@@ -13,11 +15,21 @@ import lombok.NoArgsConstructor;
 public class ImportServiceFileResponse {
   private long id;
   private String filename;
+  private String status;
+  private OffsetDateTime createdAt;
+  private String createdBy;
+  private OffsetDateTime updatedAt;
+  private String updatedBy;
 
   public static ImportServiceFileResponse toResponse(ImportServiceFile saved) {
     return ImportServiceFileResponse.builder()
       .id(saved.getId())
       .filename(saved.getFilename())
+      .status(saved.getStatus().getValue())
+      .createdAt(saved.getCreatedAt())
+      .createdBy(saved.getCreatedBy())
+      .updatedAt(saved.getUpdatedAt())
+      .updatedBy(saved.getUpdatedBy())
       .build();
   }
 }

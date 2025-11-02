@@ -74,7 +74,7 @@ public class ImportServiceFileDAO {
 
 
   static class SQLImportService {
-    static final String TABLE_NAME = "import_service";
+    static final String TABLE_NAME = "import_service_file";
 
     private SQLImportService() {
       throw new IllegalStateException("Utility class");
