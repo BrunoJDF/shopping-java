@@ -10,8 +10,6 @@ import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.time.OffsetDateTime;
-
 @Service
 @RequiredArgsConstructor
 public class CreateImportServiceFileUseCase {
@@ -22,12 +20,9 @@ public class CreateImportServiceFileUseCase {
     this.verifyContentIsValid(file);
     ImportServiceFile domain = ImportServiceFile.builder()
       .filename(file.getFilename())
-      .createdBy("system")
-      .createdAt(OffsetDateTime.now())
+      .status(StatusProcessEnum.PENDING)
       .build();
     // TODO: Crear proceso para cargar informacion del archivo
-
-    domain.setStatus(StatusProcessEnum.COMPLETED);
     ImportServiceFile saved = importServiceFileRepository.save(domain);
     return ImportServiceFileResponse.toResponse(saved);
   }

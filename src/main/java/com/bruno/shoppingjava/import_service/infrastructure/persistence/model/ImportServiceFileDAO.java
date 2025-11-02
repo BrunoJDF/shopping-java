@@ -4,6 +4,7 @@ import com.bruno.shoppingjava.import_service.domain.ImportServiceFile;
 import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -13,8 +14,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldNameConstants;
+import org.springframework.data.annotation.CreatedBy;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.OffsetDateTime;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.Optional;
 
 @Data
 @Builder
@@ -22,6 +30,7 @@ import java.time.OffsetDateTime;
 @AllArgsConstructor
 @FieldNameConstants
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = ImportServiceFileDAO.SQLImportService.TABLE_NAME)
 public class ImportServiceFileDAO {
   @Id
@@ -31,14 +40,22 @@ public class ImportServiceFileDAO {
   private String filename;
   @Column(name = SQLImportService.STATUS)
   private StatusProcessEnum status;
+
+  @CreatedBy
   @Column(name = SQLImportService.CREATED_BY)
   private String createdBy;
+
+  @CreatedDate
   @Column(name = SQLImportService.CREATED_AT)
-  private OffsetDateTime createdAt;
+  private Instant createdAt;
+
+  @LastModifiedBy
   @Column(name = SQLImportService.UPDATED_BY)
   private String updatedBy;
+
+  @LastModifiedDate
   @Column(name = SQLImportService.UPDATED_AT)
-  private OffsetDateTime updatedAt;
+  private Instant updatedAt;
   @Column(name = SQLImportService.TOTAL_RECORDS)
   private long totalRecords;
   @Column(name = SQLImportService.ERROR_MESSAGE)
@@ -49,24 +66,26 @@ public class ImportServiceFileDAO {
       .id(importServiceFile.getId())
       .filename(importServiceFile.getFilename())
       .status(importServiceFile.getStatus())
-      .createdBy(importServiceFile.getCreatedBy())
-      .createdAt(importServiceFile.getCreatedAt())
-      .updatedBy(importServiceFile.getUpdatedBy())
-      .updatedAt(importServiceFile.getUpdatedAt())
       .totalRecords(importServiceFile.getTotalRecords())
       .errorMessage(importServiceFile.getErrorMessage())
       .build();
   }
 
   public ImportServiceFile toDomain() {
+    var createdAtOffset = Optional.ofNullable(this.createdAt)
+      .map(instant -> instant.atOffset(ZoneOffset.UTC))
+      .orElse(null);
+    var updatedAtOffset = Optional.ofNullable(this.updatedAt)
+      .map(instant -> instant.atOffset(ZoneOffset.UTC))
+      .orElse(null);
     return ImportServiceFile.builder()
       .id(this.id)
       .filename(this.filename)
       .status(this.status)
       .createdBy(this.createdBy)
-      .createdAt(this.createdAt)
+      .createdAt(createdAtOffset)
       .updatedBy(this.updatedBy)
-      .updatedAt(this.updatedAt)
+      .updatedAt(updatedAtOffset)
       .totalRecords(this.totalRecords)
       .errorMessage(this.errorMessage)
       .build();
