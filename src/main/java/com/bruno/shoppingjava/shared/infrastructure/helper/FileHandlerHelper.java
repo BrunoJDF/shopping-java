@@ -11,7 +11,8 @@ import java.io.IOException;
 @Slf4j
 @UtilityClass
 public class FileHandlerHelper {
-  public ImportFileWrapper toByteArray(MultipartFile file) {
+
+  public ImportFileWrapper toImportFileWrapper(MultipartFile file) {
     try (var inputStream = file.getInputStream()) {
       byte[] bytes = inputStream.readAllBytes();
       String filename = file.getOriginalFilename();

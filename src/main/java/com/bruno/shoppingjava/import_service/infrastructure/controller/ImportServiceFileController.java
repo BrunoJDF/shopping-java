@@ -20,7 +20,7 @@ public class ImportServiceFileController {
 
   @PostMapping
   public ResponseEntity<ImportServiceFileResponse> createImportServiceFile(@RequestPart MultipartFile file) {
-    var fileWrapper = FileHandlerHelper.toByteArray(file);
+    var fileWrapper = FileHandlerHelper.toImportFileWrapper(file);
     var request = CreateImportServiceFileRequest.builder()
       .file(fileWrapper)
       .build();

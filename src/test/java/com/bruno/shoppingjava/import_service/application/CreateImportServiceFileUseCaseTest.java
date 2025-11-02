@@ -1,9 +1,12 @@
 package com.bruno.shoppingjava.import_service.application;
 
+import com.bruno.shoppingjava.import_service.application.request.CreateImportServiceFileRequest;
 import com.bruno.shoppingjava.import_service.application.request.CreateImportServiceFileRequestMother;
 import com.bruno.shoppingjava.import_service.application.response.ImportServiceFileResponse;
+import com.bruno.shoppingjava.import_service.domain.ImportServiceFile;
 import com.bruno.shoppingjava.import_service.domain.ImportServiceFileMother;
 import com.bruno.shoppingjava.import_service.domain.ImportServiceFileRepository;
+import com.bruno.shoppingjava.shared.domain.ImportFileContentTypeEnum;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -22,8 +25,10 @@ class CreateImportServiceFileUseCaseTest extends ImportServiceFileUnitTestCase {
 
   @Test
   void createShouldCallRepositorySave() {
-    var request = CreateImportServiceFileRequestMother.random();
-    var domain = ImportServiceFileMother.random();
+    ImportFileContentTypeEnum contentTypeEnum = ImportFileContentTypeEnum.CSV;
+    CreateImportServiceFileRequest request =
+      CreateImportServiceFileRequestMother.withFileType(contentTypeEnum);
+    ImportServiceFile domain = ImportServiceFileMother.random();
 
     when(importServiceFileRepository.save(any()))
       .thenReturn(domain);
@@ -35,8 +40,10 @@ class CreateImportServiceFileUseCaseTest extends ImportServiceFileUnitTestCase {
 
   @Test
   void createShouldReturnResponse() {
-    var request = CreateImportServiceFileRequestMother.random();
-    var domain = ImportServiceFileMother.random();
+    ImportFileContentTypeEnum contentTypeEnum = ImportFileContentTypeEnum.CSV;
+    CreateImportServiceFileRequest request =
+      CreateImportServiceFileRequestMother.withFileType(contentTypeEnum);
+    ImportServiceFile domain = ImportServiceFileMother.random();
 
     when(importServiceFileRepository.save(any()))
       .thenReturn(domain);
