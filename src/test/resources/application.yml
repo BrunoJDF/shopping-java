@@ -1,3 +1,6 @@
+server:
+  servlet:
+    context-path: /api
 spring:
   profiles:
     active: test,postgres
@@ -24,7 +27,7 @@ spring:
     username: ${NF_DB_SHOPPING_CART_ADMIN_USERNAME:root}
     password: ${NF_DB_SHOPPING_CART_ADMIN_PASSWORD:pwd}
   webflux:
-    base-path: /api
+    base-path: /api/v2
 logging:
   level:
     root: warn

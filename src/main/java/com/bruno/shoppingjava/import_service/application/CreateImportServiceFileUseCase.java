@@ -6,6 +6,7 @@ import com.bruno.shoppingjava.import_service.domain.ImportServiceFile;
 import com.bruno.shoppingjava.import_service.domain.ImportServiceFileRepository;
 import com.bruno.shoppingjava.shared.domain.ImportFileContentTypeEnum;
 import com.bruno.shoppingjava.shared.domain.ImportFileWrapper;
+import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +25,9 @@ public class CreateImportServiceFileUseCase {
       .createdBy("system")
       .createdAt(OffsetDateTime.now())
       .build();
+    // TODO: Crear proceso para cargar informacion del archivo
+
+    domain.setStatus(StatusProcessEnum.COMPLETED);
     ImportServiceFile saved = importServiceFileRepository.save(domain);
     return ImportServiceFileResponse.toResponse(saved);
   }
