@@ -23,8 +23,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
-import java.time.ZoneOffset;
-import java.util.Optional;
 
 @Data
 @Builder
@@ -76,20 +74,10 @@ public class ImportServiceFileDAO {
   }
 
   public ImportServiceFile toDomain() {
-    var createdAtOffset = Optional.ofNullable(this.createdAt)
-      .map(instant -> instant.atOffset(ZoneOffset.UTC))
-      .orElse(null);
-    var updatedAtOffset = Optional.ofNullable(this.updatedAt)
-      .map(instant -> instant.atOffset(ZoneOffset.UTC))
-      .orElse(null);
     return ImportServiceFile.builder()
       .id(this.id)
       .filename(this.filename)
       .status(this.status)
-      .createdBy(this.createdBy)
-      .createdAt(createdAtOffset)
-      .updatedBy(this.updatedBy)
-      .updatedAt(updatedAtOffset)
       .totalRecords(this.totalRecords)
       .errorMessage(this.errorMessage)
       .build();

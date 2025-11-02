@@ -1,9 +1,9 @@
 package com.bruno.shoppingjava.import_service.domain;
 
+import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
 import com.bruno.shoppingjava.shared.mother.BigDecimalMother;
 import com.bruno.shoppingjava.shared.mother.WordMother;
 
-import java.time.OffsetDateTime;
 import java.util.List;
 
 public class ImportServiceFileMother {
@@ -11,10 +11,7 @@ public class ImportServiceFileMother {
     return ImportServiceFile.builder()
       .id(BigDecimalMother.random().longValue())
       .filename(WordMother.random() + "_import_file.csv")
-      .createdBy("system")
-      .createdAt(OffsetDateTime.now())
-      .updatedBy("system")
-      .updatedAt(OffsetDateTime.now())
+      .status(StatusProcessEnum.PENDING)
       .build();
   }
 

@@ -26,10 +26,6 @@ public class ImportServiceFileResponse {
       .id(saved.getId())
       .filename(saved.getFilename())
       .status(saved.getStatus().getValue())
-      .createdAt(saved.getCreatedAt())
-      .createdBy(saved.getCreatedBy())
-      .updatedAt(saved.getUpdatedAt())
-      .updatedBy(saved.getUpdatedBy())
       .build();
   }
 }
