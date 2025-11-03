@@ -37,7 +37,6 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            set +e
             pkill -f 'shopping-java.jar' || true
             export DB_HOST=${{ secrets.DB_HOST }}
             export DB_PORT=${{ secrets.DB_PORT }}
@@ -45,17 +44,4 @@ jobs:
             export DB_USERNAME=${{ secrets.DB_USERNAME }}
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
-            nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
-            sleep 10
-            if pgrep -f 'shopping-java.jar' > /dev/null; then
-              echo "La aplicación está corriendo correctamente."
-            else
-              echo "La aplicación NO está corriendo. Mostrando logs de error:"
-            fi
-            echo "\n--- Últimas 50 líneas de app-error.log ---"
-            tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
-            echo "\n--- Últimas 50 líneas de app.log ---"
-            tail -n 50 app.log || echo "No hay contenido en app.log"
-            echo "\n--- Fin del script remoto ---"
-
-
+            nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2>&1 &
