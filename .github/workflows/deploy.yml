@@ -49,7 +49,8 @@ jobs:
             env | grep DB_
             env | grep SCHEMA_CONTEXT
             echo "Intentando ejecutar el JAR..."
-            nohup java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
+            nohup java -jar shopping-java.jar --spring.profiles.active=prod </dev/null > app.log 2> app-error.log &
+            disown
             sleep 5
             echo "Procesos Java:"
             pgrep -fl shopping-java.jar || echo "No hay proceso Java corriendo"
