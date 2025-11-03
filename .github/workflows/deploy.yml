@@ -37,6 +37,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            set +e
             pkill -f 'shopping-java.jar' || true
             export DB_HOST=${{ secrets.DB_HOST }}
             export DB_PORT=${{ secrets.DB_PORT }}
@@ -50,11 +51,11 @@ jobs:
               echo "La aplicación está corriendo correctamente."
             else
               echo "La aplicación NO está corriendo. Mostrando logs de error:"
-              ls -l app.log app-error.log || echo "No se encontraron logs"
-              echo "\n--- Últimas 50 líneas de app-error.log ---"
-              tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
-              echo "\n--- Últimas 50 líneas de app.log ---"
-              tail -n 50 app.log || echo "No hay contenido en app.log"
             fi
+            echo "\n--- Últimas 50 líneas de app-error.log ---"
+            tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
+            echo "\n--- Últimas 50 líneas de app.log ---"
+            tail -n 50 app.log || echo "No hay contenido en app.log"
+            echo "\n--- Fin del script remoto ---"
 
 
