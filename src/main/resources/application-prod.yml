@@ -2,8 +2,6 @@ server:
   port: ${PORT:8080}
 
 spring:
-  profiles:
-    active: prod,postgres
   application:
     name: spring-shopping-cart-java
 
