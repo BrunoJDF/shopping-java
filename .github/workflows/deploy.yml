@@ -45,9 +45,16 @@ jobs:
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
             nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
-            ps aux | grep shopping-java.jar
-            ls -l app.log app-error.log || echo "No se encontraron logs"
-            tail -n 50 app.log || echo "No hay contenido en app.log"
-            tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
+            sleep 10
+            if pgrep -f 'shopping-java.jar' > /dev/null; then
+              echo "La aplicación está corriendo correctamente."
+            else
+              echo "La aplicación NO está corriendo. Mostrando logs de error:"
+              ls -l app.log app-error.log || echo "No se encontraron logs"
+              echo "\n--- Últimas 50 líneas de app-error.log ---"
+              tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
+              echo "\n--- Últimas 50 líneas de app.log ---"
+              tail -n 50 app.log || echo "No hay contenido en app.log"
+            fi
 
 
