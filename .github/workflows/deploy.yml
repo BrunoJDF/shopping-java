@@ -37,41 +37,10 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/
-            echo "--- Directorio actual: $(pwd) ---"
-            
-            echo "Buscando proceso Java anterior..."
-            PID=$(pgrep -f "java -jar shopping-java.jar")
-            
-            if [ -n "$PID" ]; then
-              echo "Proceso anterior encontrado con PID: $PID. Deteniendo (kill -9)..."
-              kill -9 $PID
-              sleep 5
-            else
-              echo "No se encontró un proceso anterior corriendo."
-            fi
-
-            echo "Limpiando logs antiguos..."
-            rm -f app.log app-error.log
-
-            echo "Iniciando shopping-java.jar..."
-            nohup env \
-              DB_HOST=${{ secrets.DB_HOST }} \
-              DB_PORT=${{ secrets.DB_PORT }} \
-              DB_NAME=${{ secrets.DB_NAME }} \
-              DB_USERNAME=${{ secrets.DB_USERNAME }} \
-              DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
-              SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }} \
-              java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
-
-            echo "Esperando 15 segundos para que la aplicación inicie o falle..."
-            sleep 15
-            
-            echo "--- Verificando si el proceso Java está corriendo ---"
-            pgrep -fl 'java -jar shopping-java.jar' || echo "¡ALERTA! El proceso Java NO está corriendo."
-            
-            echo "--- Mostrando los últimos 50 logs de app-error.log ---"
-            tail -n 50 app-error.log || echo "app-error.log está vacío o no existe."
-
-            echo "--- Mostrando los últimos 50 logs de app.log ---"
-            tail -n 50 app.log || echo "app.log está vacío o no existe."
+            echo "JAR copiado exitosamente."
+            echo "Reiniciando el servicio systemd: shopping-app.service"
+            sudo systemctl restart shopping-app.service
+            echo "Despliegue completado."
+            sleep 5
+            echo "Verificando el estado del servicio:"
+            sudo systemctl status shopping-app.service
