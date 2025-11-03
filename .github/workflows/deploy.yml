@@ -38,4 +38,4 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             pkill -f 'shopping-java.jar' || true
-            nohup java -jar /home/ec2-user/shopping-java.jar > app.log 2>&1 &
+            nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2>&1 &
