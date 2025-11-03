@@ -37,24 +37,38 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            cd /home/ec2-user/
-            echo "Deteniendo el proceso anterior..."
+            d /home/ec2-user/
+            echo "--- Directorio actual: $(pwd) ---"
+            
+            APP_PORT=8080 
+            echo "Intentando detener cualquier proceso en el puerto $APP_PORT..."
+            sudo fuser -k ${APP_PORT}/tcp || true
+            echo "pkill por si acaso..."
             pkill -f 'shopping-java.jar' || true
             sleep 5
 
-            export DB_HOST=${{ secrets.DB_HOST }}
-            export DB_PORT=${{ secrets.DB_PORT }}
-            export DB_NAME=${{ secrets.DB_NAME }}
-            export DB_USERNAME=${{ secrets.DB_USERNAME }}
-            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
-            export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
+            echo "Limpiando logs antiguos..."
+            rm -f app.log app-error.log
 
-            echo "Iniciando la nueva aplicación..."
-            nohup java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
+            echo "Iniciando shopping-java.jar..."
             
-            echo "Esperando 10 segundos para que la app inicie..."
-            sleep 10
-            echo "Verificando el log de errores:"
+            nohup env \
+              DB_HOST=${{ secrets.DB_HOST }} \
+              DB_PORT=${{ secrets.DB_PORT }} \
+              DB_NAME=${{ secrets.DB_NAME }} \
+              DB_USERNAME=${{ secrets.DB_USERNAME }} \
+              DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+              SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }} \
+              java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
+
+            echo "Esperando 15 segundos para que la aplicación inicie o falle..."
+            sleep 15
+            
+            echo "--- Verificando si el proceso Java está corriendo ---"
+            pgrep -fl 'shopping-java.jar' || echo "¡ALERTA! El proceso Java NO está corriendo."
+            
+            echo "--- Mostrando los últimos 50 logs de app-error.log ---"
             tail -n 50 app-error.log || echo "app-error.log está vacío o no existe."
-            echo "Verificando el log principal:"
+
+            echo "--- Mostrando los últimos 50 logs de app.log (si no hubo errores) ---"
             tail -n 50 app.log || echo "app.log está vacío o no existe."
