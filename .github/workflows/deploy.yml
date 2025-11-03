@@ -38,10 +38,10 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             pkill -f 'shopping-java.jar' || true
-            export DB_HOST=${{ secrets.DB_HOST }} \
-            export DB_PORT=${{ secrets.DB_PORT }} \
-            export DB_NAME=${{ secrets.DB_NAME }} \
-            export DB_USERNAME=${{ secrets.DB_USERNAME }} \
-            export DB_PASSWORD=${{ secrets.DB_PASSWORD }} \
+            export DB_HOST=${{ secrets.DB_HOST }}
+            export DB_PORT=${{ secrets.DB_PORT }}
+            export DB_NAME=${{ secrets.DB_NAME }}
+            export DB_USERNAME=${{ secrets.DB_USERNAME }}
+            export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
             nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2>&1 &
