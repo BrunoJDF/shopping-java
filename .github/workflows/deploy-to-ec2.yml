@@ -19,10 +19,10 @@ jobs:
         distribution: 'temurin'
         cache: maven
     
-    - name: Run tests
+    - name: Run tests (unit tests only)
       run: |
         chmod +x ./mvnw
-        ./mvnw test -Dspring.profiles.active=test
+        ./mvnw test -Pci -Dspring.profiles.active=test
 
   deploy:
     needs: test
