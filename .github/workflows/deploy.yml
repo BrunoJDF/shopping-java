@@ -45,3 +45,4 @@ jobs:
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
             nohup java -jar /home/ec2-user/shopping-java.jar --spring.profiles.active=prod > app.log 2>&1 &
+            exit 0
