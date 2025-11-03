@@ -45,5 +45,15 @@ jobs:
             export DB_USERNAME=${{ secrets.DB_USERNAME }}
             export DB_PASSWORD=${{ secrets.DB_PASSWORD }}
             export SCHEMA_CONTEXT=${{ secrets.SCHEMA_CONTEXT }}
-            nohup java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2>&1 &
+            echo "Variables de entorno:"
+            env | grep DB_
+            env | grep SCHEMA_CONTEXT
+            echo "Intentando ejecutar el JAR..."
+            nohup java -jar shopping-java.jar --spring.profiles.active=prod > app.log 2> app-error.log &
+            sleep 5
+            echo "Procesos Java:"
+            pgrep -fl shopping-java.jar || echo "No hay proceso Java corriendo"
+            ls -l app.log app-error.log
+            tail -n 50 app-error.log || echo "No hay contenido en app-error.log"
+            tail -n 50 app.log || echo "No hay contenido en app.log"
             exit 0
