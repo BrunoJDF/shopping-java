@@ -1,13 +1,19 @@
 package com.bruno.shoppingjava.client.infrastructure.persistence;
 
 import com.bruno.shoppingjava.client.ClientUnitTestCase;
+import com.bruno.shoppingjava.client.infrastructure.cache.ClientCacheManager;
 import com.bruno.shoppingjava.client.infrastructure.persistence.model.ClientDAO;
 import com.bruno.shoppingjava.client.infrastructure.persistence.model.ClientDAOMother;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.function.Function;
+
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -15,6 +21,8 @@ class ClientRepositoryImplTest extends ClientUnitTestCase {
 
   @Mock
   private CrudClientRepository crudClientRepository;
+  @Mock
+  private ClientCacheManager clientCacheManager;
   @InjectMocks
   private ClientRepositoryImpl systemUnderTest;
 
@@ -34,8 +42,14 @@ class ClientRepositoryImplTest extends ClientUnitTestCase {
   void findById() {
     ClientDAO clientDAO = ClientDAOMother.random();
 
+    when(clientCacheManager.get(anyLong(), any(Function.class)))
+      .thenAnswer(invocation -> {
+        Long key = invocation.getArgument(0);
+        Function<Long, ClientDAO> handler = invocation.getArgument(1);
+        return handler.apply(key);
+      });
     when(crudClientRepository.findById(clientDAO.getId()))
-      .thenReturn(java.util.Optional.of(clientDAO));
+      .thenReturn(Optional.of(clientDAO));
 
     systemUnderTest.findById(clientDAO.getId());
 
@@ -47,7 +61,7 @@ class ClientRepositoryImplTest extends ClientUnitTestCase {
     ClientDAO clientDAO = ClientDAOMother.random();
 
     when(crudClientRepository.findAll())
-      .thenReturn(java.util.List.of(clientDAO));
+      .thenReturn(List.of(clientDAO));
 
     systemUnderTest.findAll();
 
@@ -71,7 +85,7 @@ class ClientRepositoryImplTest extends ClientUnitTestCase {
     ClientDAO clientDAO = ClientDAOMother.random();
 
     when(crudClientRepository.findById(clientDAO.getId()))
-      .thenReturn(java.util.Optional.of(clientDAO));
+      .thenReturn(Optional.of(clientDAO));
 
     systemUnderTest.delete(clientDAO.getId());
 
