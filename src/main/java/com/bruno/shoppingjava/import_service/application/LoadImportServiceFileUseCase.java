@@ -2,6 +2,7 @@ package com.bruno.shoppingjava.import_service.application;
 
 import com.bruno.shoppingjava.import_service.application.helper.ReadFileHelper;
 import com.bruno.shoppingjava.import_service.domain.ImportServiceFile;
+import com.bruno.shoppingjava.service_requested.application.CreateServiceRequestedUseCase;
 import com.bruno.shoppingjava.shared.application.exception.ShoppingRuntimeException;
 import com.bruno.shoppingjava.shared.domain.ImportFileWrapper;
 import com.bruno.shoppingjava.shared.domain.StatusProcessEnum;
@@ -15,14 +16,15 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class LoadImportServiceFileUseCase {
-  private final ServiceRequestedUseCase serviceRequestedUseCase;
+  private final CreateServiceRequestedUseCase serviceRequestedUseCase;
 
   public void processFile(ImportFileWrapper file, ImportServiceFile fileWrapper) {
     List<List<String>> records = ReadFileHelper.recordsFromCSV(file.getContent());
     logger.info("File {} has {} records", file.getFilename(), records.size());
     try {
       fileWrapper.setStatus(StatusProcessEnum.IN_PROGRESS);
-
+      serviceRequestedUseCase.createServiceRequestedFromImport(records);
+      fileWrapper.setStatus(StatusProcessEnum.COMPLETED);
     } catch (Exception e) {
       fileWrapper.setStatus(StatusProcessEnum.FAILED);
       logger.error("Error processing file: {}", file.getFilename(), e);
