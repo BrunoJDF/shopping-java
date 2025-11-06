@@ -23,9 +23,10 @@ public class FileHandlerHelper {
         .filename(filename)
         .size(size)
         .contentType(contentType)
+        .filePath(file.getName())
         .build();
     } catch (IOException e) {
-      LOGGER.error("Error reading file: {}", file.getOriginalFilename(), e);
+      logger.error("Error reading file: {}", file.getOriginalFilename(), e);
       throw new ShoppingRuntimeException("Error reading file: " + file.getOriginalFilename());
     }
   }

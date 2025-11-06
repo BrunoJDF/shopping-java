@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class CreateImportServiceFileUseCase {
   private final ImportServiceFileRepository importServiceFileRepository;
+  private final LoadImportServiceFileUseCase loadImportServiceFileUseCase;
 
   public ImportServiceFileResponse create(CreateImportServiceFileRequest request) {
     ImportFileWrapper file = request.getFile();
@@ -22,7 +23,7 @@ public class CreateImportServiceFileUseCase {
       .filename(file.getFilename())
       .status(StatusProcessEnum.PENDING)
       .build();
-    // TODO: Crear proceso para cargar informacion del archivo
+    loadImportServiceFileUseCase.processFile(file, domain);
     ImportServiceFile saved = importServiceFileRepository.save(domain);
     return ImportServiceFileResponse.toResponse(saved);
   }

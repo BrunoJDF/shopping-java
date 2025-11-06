@@ -7,6 +7,7 @@ import lombok.Getter;
 @Builder
 public class ImportFileWrapper {
   private String filename;
+  private String filePath;
   private byte[] content;
   private String contentType;
   private long size;
