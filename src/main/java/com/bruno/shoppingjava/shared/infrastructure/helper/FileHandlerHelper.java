@@ -23,7 +23,6 @@ public class FileHandlerHelper {
         .filename(filename)
         .size(size)
         .contentType(contentType)
-        .filePath(file.getName())
         .build();
     } catch (IOException e) {
       logger.error("Error reading file: {}", file.getOriginalFilename(), e);
