@@ -4,6 +4,7 @@ import com.bruno.shoppingjava.import_service.application.CreateImportServiceFile
 import com.bruno.shoppingjava.import_service.application.GetImportServiceFileUseCase;
 import com.bruno.shoppingjava.import_service.application.request.CreateImportServiceFileRequest;
 import com.bruno.shoppingjava.import_service.application.response.ImportServiceFileResponse;
+import com.bruno.shoppingjava.shared.domain.ImportFileWrapper;
 import com.bruno.shoppingjava.shared.infrastructure.helper.FileHandlerHelper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -25,11 +26,11 @@ public class ImportServiceFileController {
 
   @PostMapping
   public ResponseEntity<ImportServiceFileResponse> createImportServiceFile(@RequestPart MultipartFile file) {
-    var fileWrapper = FileHandlerHelper.toImportFileWrapper(file);
-    var request = CreateImportServiceFileRequest.builder()
+    ImportFileWrapper fileWrapper = FileHandlerHelper.toImportFileWrapper(file);
+    CreateImportServiceFileRequest request = CreateImportServiceFileRequest.builder()
       .file(fileWrapper)
       .build();
-    var response = createImportServiceFileUseCase.create(request);
+    ImportServiceFileResponse response = createImportServiceFileUseCase.create(request);
     return ResponseEntity.ok().body(response);
   }
 

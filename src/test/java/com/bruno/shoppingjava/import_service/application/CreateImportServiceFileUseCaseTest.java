@@ -13,6 +13,7 @@ import org.mockito.Mock;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -20,6 +21,8 @@ class CreateImportServiceFileUseCaseTest extends ImportServiceFileUnitTestCase {
 
   @Mock
   private ImportServiceFileRepository importServiceFileRepository;
+  @Mock
+  private LoadImportServiceFileUseCase loadImportServiceFileUseCase;
   @InjectMocks
   private CreateImportServiceFileUseCase systemUnderTest;
 
@@ -28,10 +31,14 @@ class CreateImportServiceFileUseCaseTest extends ImportServiceFileUnitTestCase {
     ImportFileContentTypeEnum contentTypeEnum = ImportFileContentTypeEnum.CSV;
     CreateImportServiceFileRequest request =
       CreateImportServiceFileRequestMother.withFileType(contentTypeEnum);
-    ImportServiceFile domain = ImportServiceFileMother.random();
+    ImportServiceFile domain =
+      ImportServiceFileMother.fromCreateRequest(request);
+    ImportServiceFile savedDomain = ImportServiceFileMother.withId(domain);
 
+    doNothing().when(loadImportServiceFileUseCase)
+      .processFile(request.getFile(), domain);
     when(importServiceFileRepository.save(any()))
-      .thenReturn(domain);
+      .thenReturn(savedDomain);
 
     systemUnderTest.create(request);
 
