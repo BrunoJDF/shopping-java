@@ -24,6 +24,7 @@ public class ReadFileHelper {
       String line;
       while ((line = res.readLine()) != null) {
         String[] values = line.split(DELIMITER);
+        logger.info("Read line with values: {}", (Object) values);
         records.add(List.of(values));
       }
       return records;
