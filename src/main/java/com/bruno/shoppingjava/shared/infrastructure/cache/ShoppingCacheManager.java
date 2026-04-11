@@ -16,8 +16,8 @@ public abstract class ShoppingCacheManager<K, V> {
     this.cache = Caffeine.newBuilder()
       .expireAfterWrite(Duration.ofHours(12))
       .maximumSize(1000)
-      .evictionListener((key, item, cause) -> LOGGER.info("Key {} was evicted. Cause: {}. Item: {}", key, cause, item))
-      .removalListener((key, item, cause) -> LOGGER.info("Key {} was removed. Cause: {}. Item: {}", key, cause, item))
+      .evictionListener((key, item, cause) -> logger.info("Key {} was evicted. Cause: {}. Item: {}", key, cause, item))
+      .removalListener((key, item, cause) -> logger.info("Key {} was removed. Cause: {}. Item: {}", key, cause, item))
       .build();
   }
 
@@ -31,7 +31,7 @@ public abstract class ShoppingCacheManager<K, V> {
 
   public V put(K key, V object) {
     if (object instanceof Throwable error) {
-      LOGGER.error("Cannot get value from cache for key: {}", key, error);
+      logger.error("Cannot get value from cache for key: {}", key, error);
       throw new IllegalArgumentException("Error retrieving value from cache: " + error.getMessage(), error);
     }
     this.cache.put(key, object);
@@ -43,7 +43,7 @@ public abstract class ShoppingCacheManager<K, V> {
   }
 
   public void clear() {
-    LOGGER.info("Clearing cache");
+    logger.info("Clearing cache");
     this.cache.invalidateAll();
   }
 

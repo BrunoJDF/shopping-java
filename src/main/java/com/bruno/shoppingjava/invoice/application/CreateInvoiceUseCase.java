@@ -40,7 +40,7 @@ public class CreateInvoiceUseCase {
     invoiceToSave.setCodInvoice(invoiceCode);
     invoiceToSave.setClient(client);
 
-    LOGGER.info("Creating invoice with code: {}", invoiceToSave);
+    logger.info("Creating invoice with code: {}", invoiceToSave);
 
     Invoice savedInvoice = repository.create(invoiceToSave);
 

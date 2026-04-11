@@ -33,6 +33,8 @@ logging:
   level:
     root: warn
     com.bruno.shoppingjava: debug
+  pattern:
+    console: "%clr(%d{yyyy-MM-dd HH:mm:ss.SSS}){faint} %clr([%thread]){faint} %clr(%-5level) %clr(%logger{36}) - %msg%n"
 shopping-cart-properties:
   sql:
     schema-context: "shopping_cart"

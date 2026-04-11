@@ -14,7 +14,7 @@ public class HandlerControllerAdvice {
 
   @ExceptionHandler(Exception.class)
   public ResponseEntity<ResponseError> handleException(Exception e) {
-    LOGGER.error("Error: ", e);
+    logger.error("Error: ", e);
     ResponseError errorResponse = ResponseError
       .fromMessage(e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR.value());
     return ResponseEntity.badRequest()
@@ -23,7 +23,7 @@ public class HandlerControllerAdvice {
 
   @ExceptionHandler(ShoppingNotFoundException.class)
   public ResponseEntity<ResponseError> handleShoppingNotFoundException(ShoppingNotFoundException e) {
-    LOGGER.error("Error: ", e);
+    logger.error("Error: ", e);
     ResponseError errorResponse = ResponseError
       .fromMessage(e.getMessage(), HttpStatus.NOT_FOUND.value());
     return ResponseEntity.status(HttpStatus.NOT_FOUND)
